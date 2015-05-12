@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}About - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>About Blendermada project</h1>
+</div></div>
+
+<div class="row"><div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+	<p>Blendermada means Blender material database.</p>
+	<p>Blendermada's mission to create good material database for Blender
+	   for all popular render engines and share it with all.</p>
+	<p>All materials here made by administrator and volunteers, and published
+	   under CC-0 license. It means you can use it anyway you want.</p>
+    <p>Blendermada is free and open. But hosting where Blendermada is placed isn't.
+       Every month I take expences to keep Blendermada alive, and they increases with number of users.
+       If you want to keep Blendermada available and fast working, you can donate some money to share that expenses.</p>
+</div></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2 text-center">
+        <h2>Donate via PayPal</h2>
+        <div>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="M8GSGUGYZSD28" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/RU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

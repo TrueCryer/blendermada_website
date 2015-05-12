@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.username }}'s profile - detail{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+        <h1>{{ object.username }}'s Profile</h1>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <img class="img-responsive thumbnail"
+             src="http://gravatar.com/avatar/{{ object.profile.get_email_hash }}?d=wavatar&s=256" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-3">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Profile</strong>
+            </li>
+            <li class="list-group-item">
+                Joined:
+                <span class="pull-right">{{ object.date_joined|date:"d M Y" }}</span>
+            </li>
+            <li class="list-group-item">
+                Last login:
+                <span class="pull-right">{{ object.last_login|date:"d M Y" }}</span>
+            </li>
+        </ul>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Stats</strong>
+            </li>
+            <li class="list-group-item">
+                Overall materials:
+                <span class="pull-right">{{ object.profile.get_overall_materials }}</span>
+            </li>
+            <li class="list-group-item">
+                Overall downloads:
+                <span class="pull-right">{{ object.profile.get_overall_downloads }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Bio</strong></div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Nickname:</dt><dd>{{ object.username }}</dd>
+                    {% if object.profile.show_fullname %}
+                    <dt>Full name:</dt><dd>{{ object.first_name }} {{ object.last_name }}</dd>
+                    {% endif %}
+                    {% if object.profile.show_email %}
+                    <dt>E-mail:</dt><dd><a href="mailto:{{ object.email }}"></a>{{ object.email }}</dd>
+                    {% endif %}
+                    <dt>Country:</dt><dd>{{ object.profile.get_country_display }}</dd>
+                    <dt>About:</dt><dd>{{ object.profile.about }}</dd>
+                    {% if object.profile.website %}
+                        <dt>Website:</dt><dd><a href="{{ object.profile.website }}" target="_blank">{{ object.profile.website }}</a></dd>
+                    {% endif %}
+                    {% if object.profile.deviantart %}
+                        <dt>Deviantart:</dt><dd><a href="{{ object.profile.deviantart }}" target="_blank">{{ object.profile.deviantart }}</a></dd>
+                    {% endif %}
+                    {% if object.profile.facebook %}
+                        <dt>Facebook:</dt><dd><a href="{{ object.profile.facebook }}" target="_blank">{{ object.profile.facebook }}</a></dd>
+                    {% endif %}
+                    {% if object.profile.twitter %}
+                        <dt>Twitter:</dt><dd><a href="{{ object.profile.twitter }}" target="_blank">{{ object.profile.twitter }}</a></dd>
+                    {% endif %}
+                    {% if object.profile.gplus %}
+                        <dt>Google+:</dt><dd><a href="{{ object.profile.gplus }}" target="_blank">{{ object.profile.gplus }}</a></dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Last materials</strong>
+                <span class="pull-right"><a href="{{ object.profile.get_materials_url }}">See all &gt;</a></span>
+            </div>
+            <table class="table">
+                <thead><tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Engine</th>
+                    <th>Downloads</th>
+                    <th>Rating</th>
+                </tr></thead>
+                <tbody>{% for material in object.profile.get_last_materials %}
+                    <tr>
+                        <td><a href="{{ material.get_absolute_url }}">{{ material.name }}</a></td>
+                        <td>{{ material.category }}</td>
+                        <td>{{ material.get_engine_display }}</td>
+                        <td>{{ material.downloads }}</td>
+                        <td>{{ material.rating }}</td>
+                    </tr>
+                {% endfor %}</tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - {{ user.username }}'s account - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ user.username }}'s account - Home</h1>
+</div></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="{% url 'account_materials' %}"><span class="glyphicon glyphicon-record"></span> Materials</a></li>
+            <li><a href="{% url 'account_uploads' %}"><span class="glyphicon glyphicon-upload"></span> Uploads</a></li>
+            <li><a href="{% url 'account_statistics' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+            <li><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Bio</strong></div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Nickname:</dt><dd>{{ user.username }}</dd>
+                    <dt>Full name:</dt><dd>{{ user.first_name }} {{ user.last_name }}</dd>
+                    <dt>E-mail:</dt><dd><a href="mailto:{{ user.email }}"></a>{{ user.email }}</dd>
+                    <dt>Country:</dt><dd>{{ user.profile.get_country_display }}</dd>
+                    <dt>About:</dt><dd>{{ user.profile.about }}</dd>
+                    {% if user.profile.website %}
+                        <dt>Website:</dt><dd><a href="{{ user.profile.website }}" target="_blank">{{ user.profile.website }}</a></dd>
+                    {% endif %}
+                    {% if user.profile.deviantart %}
+                        <dt>Deviantart:</dt><dd><a href="{{ user.profile.deviantart }}" target="_blank">{{ user.profile.deviantart }}</a></dd>
+                    {% endif %}
+                    {% if user.profile.facebook %}
+                        <dt>Facebook:</dt><dd><a href="{{ user.profile.facebook }}" target="_blank">{{ user.profile.facebook }}</a></dd>
+                    {% endif %}
+                    {% if user.profile.twitter %}
+                        <dt>Twitter:</dt><dd><a href="{{ user.profile.twitter }}" target="_blank">{{ user.profile.twitter }}</a></dd>
+                    {% endif %}
+                    {% if user.profile.gplus %}
+                        <dt>Google+:</dt><dd><a href="{{ user.profile.gplus }}" target="_blank">{{ user.profile.gplus }}</a></dd>
+                    {% endif %}
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+        <img class="img-responsive thumbnail"
+            src="http://gravatar.com/avatar/{{ user.profile.get_email_hash }}?d=wavatar&s=256" />
+        <p class="text-center">Avatar is attached with <a href="http://gravatar.com/">Gravatar</a> system.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Last materials</strong>
+                <span class="pull-right"><a href="{% url 'account_materials' %}">See all &gt;</a></span>
+            </div>
+            <table class="table">
+                <thead><tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Engine</th>
+                    <th>Downloads</th>
+                    <th>Rating</th>
+                </tr></thead>
+                <tbody>{% for material in user.profile.get_last_materials %}
+                    <tr>
+                        <td><a href="{{ material.get_absolute_url }}">{{ material.name }}</a></td>
+                        <td>{{ material.category }}</td>
+                        <td>{{ material.get_engine_display }}</td>
+                        <td>{{ material.downloads }}</td>
+                        <td>{{ material.rating }}</td>
+                    </tr>
+                {% endfor %}</tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Stats</strong>
+            </li>
+            <li class="list-group-item">
+                Overall materials:
+                <span class="pull-right">{{ user.profile.get_overall_materials }}</span>
+            </li>
+            <li class="list-group-item">
+                Overall downloads:
+                <span class="pull-right">{{ user.profile.get_overall_downloads }}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+        <meta name="description" content="Blendermada is Blender Material Database" />
+        <meta name="keywords" content="blender,b3d,online,materials,library,database,assets,community,free,cc-by-sa,ccbysa,cc-by,ccby,cc-0,cc0,cco,creative commons,libre,open source," />
+        <meta name="author" content="Sergey Ozerov, &lt;ozzyrov@gmail.com&gt;" />
+        <link href="https://plus.google.com/107549607008388581881" rel="publisher" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="yandex-verification" content="7c492936f3493c31" />
+        <meta name="google-site-verification" content="0MMV-MlXu7m2-9cu_0y4AVBmMGrEP9AMnGCiWAHoVLE" />
+        <title>{% block title %}{% endblock %}Blendermada</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+        <link href="/static/css/style.css" rel="stylesheet" />
+        {% block extra_css %}{% endblock %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="/static/js/script.js"></script>
+        {% block extra_js %}{% endblock %}
+    </head>
+    <body>
+        {% include 'navigation.html' %}
+        {% block jumbotron %}{% endblock %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+        {% include 'footer.html' %}
+        {% if not debug %}{% include 'statistics.html' %}{% endif %}
+    </body>
+</html>

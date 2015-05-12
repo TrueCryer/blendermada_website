@@ -55,3 +55,12 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Local settings files
+dev.py
+prod.py
+manage_dev.py
+manage_prod.py
+
+# Database files
+*.sqlite

@@ -1,0 +1,6 @@
+Your material got a new comment.
+
+You can check it at http://blendermada.com{{ material.get_absolute_url }}.
+
+If you don't wanna recieve notifications, you can enter settings page - http://blendermada.com{% url 'account_settings' %},
+and uncheck "Send notification".

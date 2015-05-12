@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Blendermada client add-on - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>Blendermada client add-on for Blender</h1>
+</div></div>
+
+<div class="row"><div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-warning">
+        <div class="panel-heading"><strong>Development version</strong></div>
+        <div class="panel-body text-center">
+            <p><a href="/static/releases/dev/blendermada.py" class="btn btn-primary btn-lg">Version 0.2.1-a - Download now</a></p>
+        </div>
+        <div class="panel-footer">
+            <p><strong>Caution, this is alpha version</strong></p>
+            <p><strong>Caution again. After website changed I had no time to test addon. Maybe it works not so properly.</strong></p>
+        </div>
+    </div>
+</div></div>
+
+<div class="row"><div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <h3>How to use:</h3>
+    <ol>
+        <li>Install it like typical add-on for Blender (here is a link)</li>
+        <li>Turn on the add-on</li>
+        <li>Find add-on panel at Properties window inside Materials tab</li>
+        <li>Press Update button to connect to server</li>
+        <li>To enable/disable preview just press preview button. When preview is active, you can drag it with middle mouse button</li>
+        <li>Select material and press Import</li>
+    </ol>
+    <br/>
+    <h3>Changelog</h3>
+    <h4>0.1.3 to 0.2.1</h4>
+    <ul>
+        <li>Added material preview</li>
+    </ul>
+    <h4>0.1.2 to 0.1.3</h4>
+    <ul>
+        <li>Change server API. For now client shows only materials for active render engine</li>
+    </ul>
+    <h4>0.1.1 to 0.1.2</h4>
+    <ul>
+        <li>Added support of Blender 2.72 new append method</li>
+    </ul>
+    <h4>0.1.0 to 0.1.1</h4>
+    <ul>
+        <li>Duplication control. If a material with name like imported already exists, importing canceled.</li>
+        <li>Imported material replaces material in active slot.</li>
+    </ul>
+    <br/>
+    <p>Client is still under active development.
+        If you find a bug, of have another issue, you can find this project
+        on <a href="https://github.com/TrueCryer/blendermada">GitHub</a> or
+        write me directly - <a href="mailto:ozzyrov@gmail.com">ozzyrov@gmail.com</a></p>
+</div></div>
+{% endblock %}

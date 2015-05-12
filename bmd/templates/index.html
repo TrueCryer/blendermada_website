@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1>Welcome to Blendermada</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <p>
+            Blendermada means Blender Material Database. Database contains materials for popular open-source 3D editor
+            <a href="http://blender.org/">Blender</a>.
+        </p>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <h2>Different engines</h2>
+        <p>
+            Blender supports different render engines and Blendermada supports materials for these engines:
+            <a href="{% url 'materials_index' %}?engine=cyc">Cycles</a>,
+            <a href="{% url 'materials_index' %}?engine=int">Blender Internal</a> and others.
+            Just select needed engine in search form at the bottom of material page.
+        </p>
+        <p><a href="{% url 'materials_index' %}" class="btn btn-primary">Browse materials</a></p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <h2>Download without registration</h2>
+        <p>
+            If you want just download a material, you need no registration - just press download and save .blend file
+            with material. If you want to join this project as contributor of vote for material, you should register.
+        </p>
+        <p>
+            <a href="{% url 'registration_register' %}" class="btn btn-primary">Register</a>
+            or
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        </p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <h2>Blender add-on</h2>
+        <p>
+            Database wouldn't be good if you couldn't browse and import materials straight into Blender. But you can.
+            We made special add-on for Blender and you can work with Blendermada inside your favorite 3D editor. But
+            don't forget to visit <a href="http://blendermada.com">http://blendermada.com</a> sometimes, it contains
+            much more information.
+        </p>
+        <p><a href="{% url 'addon' %}" class="btn btn-primary">Get add-on</a></p>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <h3>Last materials, <small><a href="{% url 'materials_index' %}">browse all &gt;</a></small></h3>
+        {% load materials_tags %}
+        {% materials_last %}
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <h3>Blendermada on Twitter</h3>
+        {% if not debug %}{% include "twitter.html" %}{% else %}<p>Twitter's thread block</p>{% endif %}
+    </div>
+</div>
+{% endblock %}

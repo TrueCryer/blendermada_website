@@ -1,0 +1,16 @@
+
+{% if upload.author.first_name %}
+    Hi, {{ upload.author.first_name }}!
+{% else %}
+    Hi, {{ upload.author.username }}!
+{% endif %}
+
+
+Material {{ upload.name }} you uploaded on http://blendermada.com caused an error at rendering server:
+
+{{ upload.error}}
+
+Please, check it, fix and upload again. This upload will be placed in deletion queue.
+
+
+Sincerely, Blendermada's administration.

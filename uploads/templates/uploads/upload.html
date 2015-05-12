@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload new material - {% endblock %}
+
+{% block extra_js %}
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>tinymce.init({
+    selector:'textarea',
+    menubar : false,
+    plugins: "link"
+});</script>
+{% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>Upload new material</h1>
+</div></div>
+
+
+<div class="row"><div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <h3>Something about upload</h3>
+    <p>All previews are made by our own rendering server. You're not need
+       to make preview image, just upload file with material. If you want to
+       check how your material will look, you can get all scenes server uses
+       to render at <a href="/uploads/stuff/">rendering stuff section</a>.</p>
+    <p>Our server isn't psychic, and with file you should specify name of
+       material in your file.</p>
+    <p>After you upload your material, you can check status at
+       <a href="/account/uploads/">uploads section</a>.</p>
+    <p>When preview will be ready, you should check it and approve if preview
+       looks like you want to.</p>
+    <p>After material publishing upload will be deleted as not needed. It's normal.
+       Your material won't disappear.</p>
+    <h3>Rules for uploads</h3>
+    <ul>
+        <li>Please, check if the same or quite same already existing in database. All materials after rendering pass
+            moderation and if someone copying already existing material it "shall not pass".</li>
+        <li>We accept only .blend files. Don't zip it.</li>
+        <li>File should contains only one material to render. It can contains more, but to postprocessing, render
+            publishing will be pushed only one material.</li>
+        <li>Please, make file as small as possible. Keep server's disk space.</li>
+        <li>Because of copyright problem we currently don't accept image textures. Material can contains only
+            procedural textures. All images from .blend file will be removed while preprocessing.</li>
+        <li>All materials will be published under CC-0 license.</li>
+    </ul>
+</div></div>
+
+<div class="row"><div class="col-xs-12">
+	<form class="form-horizontal" role="form" enctype="multipart/form-data" action="{% url 'uploads_upload' %}" method="post">
+        {% csrf_token %}
+		{% for field in form %}
+		<div class="form-group{% if field.errors %} error {% endif %}">
+			<label class="col-xs-12 col-sm-2 control-label">
+				{{ field.label }}
+				{% if field.errors %}
+					<span class="help-inline text-danger">
+						{% for error in  field.errors %}{{ error }}{% endfor %}
+					</span>
+				{% endif %}
+			</label>
+			<div class="col-xs-12 col-sm-10 col-md-9">{{ field.as_widget }}</div>
+		</div>
+		{% endfor %}
+		<div class="form-group"><div class="col-xs-12 col-sm-10 col-sm-offset-2">
+			<button type="submit" class="btn btn-primary">I'm agree with rules and want to upload material.</button>
+		</div></div>
+	</form>
+</div></div>
+
+{% endblock %}

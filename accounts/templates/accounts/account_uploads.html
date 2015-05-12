@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Uploads - {{ user.username }}'s account - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ user.username }}'s account - Uploads</h1>
+</div></div>
+
+<div class="row">
+    <div class="col-sm-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="{% url 'account_materials' %}"><span class="glyphicon glyphicon-record"></span> Materials</a></li>
+            <li class="active"><a href="{% url 'account_uploads' %}"><span class="glyphicon glyphicon-upload"></span> Uploads</a></li>
+            <li><a href="{% url 'account_statistics' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+            <li><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Engine</th>
+                    <th><a href="{% url 'uploads_upload' %}" class="btn btn-success btn-sm">Upload new</a></th>
+                </tr>
+                {% for obj in user.uploads.all %}
+                <tr class="{{ obj.get_css_class }}">
+                    <td>{{ obj.get_status_display }}</td>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.date }}</td>
+                    <td>{{ obj.get_engine_display }}</td>
+                    <td><a href="{{ obj.get_absolute_url }}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

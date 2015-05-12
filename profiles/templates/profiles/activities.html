@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.username }}'s profile - detail{% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ object.username }}'s profile - Activities</h1>
+</div></div>
+
+<div class="row">
+    <ul class="nav nav-tabs nav-justified">
+        <li><a href="{{ object.profile.get_absolute_url }}">Detail</a></li>
+        <li><a href="{{ object.profile.get_materials_url }}">Materials</a></li>
+        <li class="active"><a href="{{ object.profile.get_activities_url }}">Activities</a></li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-sm-3 col-xs-12">
+        avatar
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <h2>Info</h2>
+        <p>First name: {{ object.first_name }}</p>
+        <p>Last name: {{ object.last_name }}</p>
+        <p>Gender: {{ object.profile.gender }}</p>
+        <hr/>
+    </div>
+</div>
+{% endblock %}

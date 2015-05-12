@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ material.name }} - {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/materials.min.css" />
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ material.name }}</h1>
+</div></div>
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-5">
+        <p class="text-center"><a href="{{ material.thumb_big.url }}">
+            <img class="img-responsive img-thumbnail" src="{{ material.thumb_medium.url }}" alt="{{ material.name }}" />
+        </a></p>
+    </div>
+
+    <div class="col-xs-12 col-sm-7">
+        <div class="row">
+            <div class="col-xs-4">
+                <p class="text-center download">
+                    <a href="{{ material.get_download_url }}">
+                        <span class="glyphicon glyphicon-download download-icon"></span>
+                        <br/>
+                        <span class="download-caption">DOWNLOAD</span>
+                    </a>
+                </p>
+            </div>
+            <div class="col-xs-6">
+                {% load materials_tags %}
+                <div class="text-center rating rating-header">Rating - {% stars material %}</div>
+                <div class="text-center rating rating-score">{{ material.rating }}</div>
+                <div class="text-center rating rating-votes">Votes: {{ material.votes_count }}</div>
+                {% if user.is_authenticated %}
+                    {% if user.pk in material.voted_users %}
+                        <p class="text-center">You voted already</p>
+                    {% else %}
+                        <div class="text-center"><ul class="pagination pagination-sm">
+                            <li class="active"><a>Vote: </a></li>
+                            <li><a href="{% url 'materials_vote' material.pk material.slug 1 %}">1</a></li>
+                            <li><a href="{% url 'materials_vote' material.pk material.slug 2 %}">2</a></li>
+                            <li><a href="{% url 'materials_vote' material.pk material.slug 3 %}">3</a></li>
+                            <li><a href="{% url 'materials_vote' material.pk material.slug 4 %}">4</a></li>
+                            <li><a href="{% url 'materials_vote' material.pk material.slug 5 %}">5</a></li>
+                        </ul></div>
+                    {% endif %}
+                {% else %}
+                    <p class="text-center"><a href="{% url 'login' %}" class="label label-default">Login to vote</a></p>
+                {% endif %}
+            </div>
+            <div class="col-xs-2">
+                <p>{% include 'materials/buttons.html' %}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <ul class="list-group text-center">
+                    <li class="list-group-item"><strong>Engine</strong></li>
+                    <li class="list-group-item">{{ material.get_engine_display }}</li>
+                </ul>
+            </div>
+            <div class="col-xs-6">
+                <ul class="list-group text-center">
+                    <li class="list-group-item default"><strong>Category</strong></li>
+                    <li class="list-group-item">{{ material.category }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <ul class="list-group text-center">
+                    <li class="list-group-item default"><strong>Added</strong></li>
+                    <li class="list-group-item">{{ material.date|date:"d b Y" }}</li>
+                </ul>
+            </div>
+            <div class="col-xs-4">
+                <ul class="list-group text-center">
+                    <li class="list-group-item default"><strong>Downloads</strong></li>
+                    <li class="list-group-item">{{ material.downloads }}</li>
+                </ul>
+            </div>
+            <div class="col-xs-4">
+                <ul class="list-group text-center">
+                    <li class="list-group-item default"><strong>Author</strong></li>
+                    <li class="list-group-item"><a href="{{ material.user.profile.get_absolute_url }}">{{ material.user.username }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row"><div class="col-xs-12">
+    <div class="panel panel-default"><div class="panel-body">
+        {% autoescape off %}{{ material.description }}{% endautoescape %}
+    </div></div>
+</div></div>
+
+<hr/>
+
+<div class="row"><div class="col-xs-12">
+    <h2>Comments</h2>
+    {% if not debug %}{% include "materials/comments.html" %}{% else %}<p>Comments block by Disqus</p>{% endif %}
+</div></div>
+{% endblock %}

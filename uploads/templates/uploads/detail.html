@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }} by {{ object.author }} - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ object.name }} by {{ object.author }}</h1>
+</div></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <h2>Upload information</h2>
+        <dl class="dl-horizontal">
+            <dt>Name:</dt><dd>{{ object.name }}</dd>
+            <dt>Description:</dt><dd>{% autoescape off %}{{ object.description }}{% endautoescape %}</dd>
+            <dt>Engine, Scene:</dt><dd>{{ object.get_engine_display }}, {{ object.get_scene_display }}</dd>
+            <dt>Uploaded at:</dt><dd>{{ object.date }}</dd>
+            <dt>Author:</dt><dd>{{ object.author }}</dd>
+            <hr />
+            <dt>Material name in file:</dt><dd>{{ object.name_in_file }}</dd>
+            <dt>Uploaded file:</dt><dd><a href="{{ object.uploaded_file.url }}" class="btn btn-primary">Get</a></dd>
+        </dl>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <h2>Process information</h2>
+        <dl class="dl-horizontal">
+            <dt>Status:</dt><dd class="bg-{{ object.get_css_class }}">{{ object.get_status_display }}</dd>
+            {% if object.render_started %}
+                <dt>Render started at:</dt><dd>{{ object.render_started }}</dd>
+            {% endif %}
+            {% if object.render_finished %}
+                <dt>Render finished at:</dt><dd>{{ object.render_finished }}</dd>
+            {% endif %}
+            {% if object.error %}
+                <dt>Error:</dt><dd>{{ object.error }}</dd>
+            {% endif %}
+        </dl>
+    </div>
+</div>
+{% if object.rendered %}
+<div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <h2>Results information</h2>
+        <p><strong>Category:</strong> {{ object.category }}</p>
+        {% if object.user_approved %}
+            <p>Approved by author</p>
+        {% else %}
+            <p>Not approved by author, <a href="{% url 'uploads_approve' object.pk %}" class="btn btn-success">Approve</a></p>
+        {% endif %}
+        {% if object.admin_approved %}
+            <p>Approved by administration</p>
+        {% else %}
+            <p>Not approved by administration</p>
+        {% endif %}
+        <p><a href="{{ object.storage.url }}" class="btn btn-primary">Get prepared library</a></p>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <img class="img-thumbnail img-responsive" src="{{ object.image.url }}" />
+    </div>
+</div>
+{% endif %}
+{% endblock %}

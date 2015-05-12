@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings - {{ user.username }}'s account - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ user.username }}'s account - Settings</h1>
+</div></div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="{% url 'account_materials' %}"><span class="glyphicon glyphicon-record"></span> Materials</a></li>
+            <li><a href="{% url 'account_uploads' %}"><span class="glyphicon glyphicon-upload"></span> Uploads</a></li>
+            <li><a href="{% url 'account_statistics' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+            <li class="active"><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <form role="form" method="post" action="{% url 'account_settings' %}">{% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group{% if field.errors %} error {% endif %}">
+                {{ field.label_tag }}
+                {% if field.errors %}
+			        <span class="help-inline text-danger">
+				        {% for error in  field.errors %}{{ error }}{% endfor %}
+                    </span>
+                {% endif %}
+                {{ field.as_widget }}
+            </div>
+            {% endfor %}
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-default btn-primary" value="Save" />
+            </div>
+
+        </form>
+        <hr/>
+        <p><a href="{% url 'password_change' %}" class="btn btn-default">Change password</a></p>
+    </div>
+</div>
+{% endblock %}

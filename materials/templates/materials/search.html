@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-inverse">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'uploads_upload' %}">Upload new material</a>
+    </div>
+    <div class="collapse navbar-collapse" id="search-collapse">
+        <form role="search" class="navbar-form navbar-right" action="{% url 'materials_index' %}" method="get">
+            <div class="form-group">
+                <select class="form-control" name="engine" id="engine" placeholder="Engine">
+                    <option value="">All Engines</option>
+                    {% comment %} in future
+                    {% for key, value in engines %}
+                    <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                    {% endcomment %}
+                    <option value="cyc">Cycles</option>
+                </select>
+                <select class="form-control" name="category" id="category" placeholder="Category">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category.slug }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <input class="form-control" name="keyword" id="keyword" placeholder="Keyword">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
+            if (results == null)
+                return "";
+            else
+                return results[1];
+        }
+        var sName = getParameterByName(name);
+        $("#engine").val(getParameterByName('engine'));
+        $("#category").val(getParameterByName('category'));
+        $("#keyword").val(getParameterByName('keyword'));
+    </script>
+</nav>
+
+

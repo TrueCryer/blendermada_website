@@ -1,0 +1,31 @@
+{% load url from future %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Blendermada registration</title>
+</head>
+
+<body>
+<p>
+    You (or someone pretending to be you) have asked to register an account at
+    <a href="http://{{ site.domain }}/">Blendermada</a>.  If this weren't you,
+    please ignore this email and your address will be removed from our records
+    automatically.
+</p>
+<p>
+    To activate this account, please click the following link within the next
+    {{ expiration_days }} days:
+</p>
+
+<p>
+    <a href="http://{{site.domain}}{% url 'registration_activate' activation_key %}">
+        {{site.domain}}{% url 'registration_activate' activation_key %}
+    </a>
+</p>
+<p>
+    Sincerely, Blendermada's administration.
+</p>
+</body>
+
+</html>

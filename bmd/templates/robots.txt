@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /uploads/
+Host: blendermada.com
+Sitemap: http://blendermada.com/sitemap.xml

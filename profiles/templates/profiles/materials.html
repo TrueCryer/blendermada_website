@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.username }}'s profile - materials{% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>{{ object.username }}'s profile - Materials</h1>
+</div></div>
+
+{% load materials_tags %}
+<div class="row">
+    {% for obj in object.materials.all %}
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <a href="{{ obj.get_absolute_url }}" class="thumbnail">
+            <div class="caption text-center">
+                <h4>{{ obj.name|truncatechars_html:20 }}</h4>
+            </div>
+            <img class="img" src="{{ obj.thumb_small.url }}" alt="{{ obj.name }}">
+            <div class="caption">
+                <div class="pull-left"><p class="label label-primary">{% stars obj %}</p></div>
+                <div class="pull-right">
+                    <p class="label label-success">{{ obj.get_engine_display }}</p>
+                    <p class="label label-default">{{ obj.category }}</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

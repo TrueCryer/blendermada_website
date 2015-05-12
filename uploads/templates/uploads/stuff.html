@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Rendering stuff - {% endblock %}
+
+{% block content %}
+<div class="row"><div class="page-header">
+    <h1>Scenes and other stuff</h1>
+</div></div>
+
+{% regroup object_list by get_engine_display as engine_list %}
+
+{% for engine in engine_list %}
+<div class="row"><div class="panel panel-primary">
+    <div class="panel-heading"><h2>{{ engine.grouper }}</h2></div>
+    <div class="panel-body">
+        {% for scene in engine.list %}
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <a href="{{ scene.file.url }}" class="thumbnail">
+                <div class="caption text-center"><h4>{{ scene.get_type_display }}</h4></div>
+                <img class="img" src="{{ scene.thumb_small.url }}" alt="{{ scene.get_type_display }}">
+                <div class="caption text-center"><h4>{{ scene.file.size|filesizeformat }}</h4></div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div></div>
+{% endfor %}
+
+{% endblock %}
