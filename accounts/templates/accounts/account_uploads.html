@@ -25,7 +25,7 @@
                     <th>Name</th>
                     <th>Date</th>
                     <th>Engine</th>
-                    <th><a href="{% url 'uploads_upload' %}" class="btn btn-success btn-sm">Upload new</a></th>
+                    <th></th>
                 </tr>
                 {% for obj in user.uploads.all %}
                 <tr class="{{ obj.get_css_class }}">
@@ -33,11 +33,12 @@
                     <td>{{ obj.name }}</td>
                     <td>{{ obj.date }}</td>
                     <td>{{ obj.get_engine_display }}</td>
-                    <td><a href="{{ obj.get_absolute_url }}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                    <td><a href="{{ obj.get_absolute_url }}" class="btn btn-default btn-sm btn-block"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
+        <a href="{% url 'uploads_upload' %}" class="btn btn-success btn-lg btn-block">Upload new</a>
     </div>
 </div>
 {% endblock %}

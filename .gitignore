@@ -64,3 +64,9 @@ manage_prod.py
 
 # Database files
 *.sqlite
+
+# Media files
+media/
+
+# PyCharm preferences
+.idea/
