@@ -1,6 +1,6 @@
 <div class="row">
     {% for obj in materials %}
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-xs-12 col-sm-6 col-md-4">
             <a href="{{ obj.get_absolute_url }}" class="thumbnail">
                 <div class="caption text-center">
                     <h8>{{ obj.name|truncatechars_html:20 }}</h8>

@@ -28,7 +28,7 @@ def stars(material):
 
 
 @register.inclusion_tag('materials/last.html')
-def materials_last(number=4):
+def materials_last(number=6):
     materials = Material.objects.published()[:number]
     return {
         'materials': materials,
