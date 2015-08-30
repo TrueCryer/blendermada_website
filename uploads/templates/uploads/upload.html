@@ -3,11 +3,10 @@
 {% block title %}Upload new material - {% endblock %}
 
 {% block extra_js %}
-<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
 <script>tinymce.init({
-    selector:'textarea',
-    menubar : false,
-    plugins: "link"
+    selector:"textarea",
+    plugins: "advlist autolink charmap image link media table textcolor"
 });</script>
 {% endblock %}
 
