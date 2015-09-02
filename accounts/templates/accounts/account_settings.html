@@ -4,28 +4,31 @@
 
 {% block content %}
 <div class="row"><div class="page-header">
-    <h1>{{ user.username }}'s account - Settings</h1>
+    <h1>Settings <span class="pull-right">{{ user.username }}'s account</span></h1>
 </div></div>
 
 <div class="row">
-    <div class="col-xs-12 col-sm-3">
-        <ul class="nav nav-pills nav-stacked">
-            <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-            <li><a href="{% url 'account_materials' %}"><span class="glyphicon glyphicon-record"></span> Materials</a></li>
-            <li><a href="{% url 'account_uploads' %}"><span class="glyphicon glyphicon-upload"></span> Uploads</a></li>
-            <li><a href="{% url 'account_statistics' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
-            <li class="active"><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-        </ul>
-    </div>
-    <div class="col-xs-12 col-sm-9">
+    <ul class="nav nav-pills nav-justified">
+        <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="{% url 'account_materials' %}"><span class="glyphicon glyphicon-record"></span> Materials</a></li>
+        <li><a href="{% url 'account_uploads' %}"><span class="glyphicon glyphicon-upload"></span> Uploads</a></li>
+        <li><a href="{% url 'account_statistics' %}"><span class="glyphicon glyphicon-stats"></span> Statistics</a></li>
+        <li class="active"><a href="{% url 'account_settings' %}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+    </ul>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="col-xs-12">
         <form role="form" method="post" action="{% url 'account_settings' %}">{% csrf_token %}
 
             {% for field in form %}
             <div class="form-group{% if field.errors %} error {% endif %}">
                 {{ field.label_tag }}
                 {% if field.errors %}
-			        <span class="help-inline text-danger">
-				        {% for error in  field.errors %}{{ error }}{% endfor %}
+                    <span class="help-inline text-danger">
+                        {% for error in  field.errors %}{{ error }}{% endfor %}
                     </span>
                 {% endif %}
                 {{ field.as_widget }}
