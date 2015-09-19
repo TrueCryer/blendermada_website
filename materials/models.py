@@ -13,7 +13,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.conf import settings
 from django.core.files.base import ContentFile
 
-from brabeion import badges
 from core.mail import send_templated_mail
 
 
@@ -140,7 +139,6 @@ class Material(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super(Material, self).save(**kwargs)
-        badges.possibly_award_badge('material_maker_awarded', user=self.user)
 
     def make_thumbs(self):
         tmp = tempfile.mktemp(suffix='.jpg')

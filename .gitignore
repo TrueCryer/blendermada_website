@@ -8,6 +8,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -68,5 +69,6 @@ manage_prod.py
 # Media files
 media/
 
-# PyCharm preferences
+# IDE preferences
 .idea/
+*.nja

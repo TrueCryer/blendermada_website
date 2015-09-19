@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1>Blendermada digest for {{ date_to }}</h1>
+        <h2>New uploaded materials</h2>
+        <table><tbody>
+            {% for mat in new_materials %}
+            <tr>
+                <td>
+                    <img src="{{ mat.thumb_small.url }}" alt="{{ mat.slug }}" class="u-full-width">
+                </td>
+                <td>
+                    <h3><a href="{{ mat.get_absolute_url }}" target="_blank">{{ mat.name }}</a></h3>
+                    {{ mat.description }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody></table>
+        <h2>Top downloaded materials</h2>
+        <table><tbody>
+            {% for mat, count in top_materials %}
+            <tr>
+                <td>
+                    <img src="{{ mat.thumb_small.url }}" alt="{{ mat.slug }}" class="u-full-width">
+                </td>
+                <td>
+                    <h3><a href="{{ mat.get_absolute_url }}" target="_blank">{{ mat.name }}</a> - {{ count }} downloads</h3>
+                    {{ mat.description }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody></table>
+    </body>
+</html>
