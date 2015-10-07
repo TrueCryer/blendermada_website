@@ -2,6 +2,10 @@
 
 {% block title %}Materials, page {{ page.number }} - {% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/materials.min.css" />
+{% endblock %}
+
 {% block content %}
 <div class="row"><div class="page-header">
     <h1>
@@ -14,8 +18,8 @@
 <div class="row">
     {% if page.object_list %}
         {% for obj in page.object_list %}
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <a href="{{ obj.get_absolute_url }}" class="thumbnail">
+            <div class="col-xs-12 col-sm-6 col-md-4 material-thumb">
+                <a href="{{ obj.get_absolute_url }}" class="thumbnail material-thumb">
                     <div class="caption text-center">
                         <h4>{{ obj.name|truncatechars_html:20 }}</h4>
                     </div>

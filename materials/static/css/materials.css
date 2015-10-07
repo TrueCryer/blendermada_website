@@ -25,9 +25,9 @@
 /**
  * Rules for download panel
  */
- .download a {
-     color: rgb(0, 0, 0);
- }
+.download a {
+    color: rgb(0, 0, 0);
+}
 .download-icon {
     font-size:600%;
     line-height: 1.4;
@@ -35,4 +35,18 @@
 .download-caption {
     font-size:150%;
     line-height: 1.2;
+}
+
+
+/**
+ * List settings
+ */
+.material-thumb {
+    margin: 0px;
+    padding: 0px;
+    border-top-color: #EEE;
+    border-left-color: #DDD;
+    border-right-color: #AAA;
+    border-bottom-color: #888;
+    border-radius: 0px;
 }

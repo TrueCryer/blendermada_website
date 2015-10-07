@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import html2text
 from os import path
 from uuid import uuid4
 import tempfile
@@ -102,6 +103,14 @@ class Material(models.Model):
     downloads = models.IntegerField('Number of downloads', default=0)
     rating = models.FloatField('Rating', default=0)
     votes_count = models.IntegerField('Number of votes', default=0)
+
+    @property
+    def html_description(self):
+        return self.description
+
+    @property
+    def text_description(self):
+        return html2text.html2text(self.description)
 
     objects = MaterialManager()
 
