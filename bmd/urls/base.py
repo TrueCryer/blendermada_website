@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 
 from django.contrib import admin
 admin.autodiscover()
@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from bmd.sitemaps import sitemaps
 
 
-urlpatterns = patterns('',
+urlpatterns = [
 
     url(r'^admin/', include('smuggler.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -29,4 +29,4 @@ urlpatterns = patterns('',
     url(r'^api/materials/', include('materials.api')),
     url(r'^api/uploads/', include('uploads.api')),
 
-)
+]

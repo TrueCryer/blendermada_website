@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic.base import TemplateView
 
 from .views import (
@@ -10,7 +10,7 @@ from .views import (
 )
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^activate/(?P<activation_key>\w+)/$',
         ActivationView.as_view(),
         name='registration_activate'),
@@ -43,4 +43,4 @@ urlpatterns = patterns('',
     url(r'^statistics/$', StatisticsView.as_view(), name='account_statistics'),
     url(r'^notifications/$', SettingsView.as_view(), name='account_settings'),
     url(r'^uploads/$', UploadsView.as_view(), name='account_uploads'),
-)
+]
