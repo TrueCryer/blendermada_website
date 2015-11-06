@@ -41,6 +41,7 @@ class MaterialAdmin(SlugAdmin):
 class StatisticAdmin(admin.ModelAdmin):
     list_display = ('date', 'material', 'count')
     list_filter = ('date', 'material')
+    list_per_page = 25
 
 
 admin.site.register(Category, SlugAdmin)
