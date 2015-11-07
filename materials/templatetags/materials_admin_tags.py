@@ -14,5 +14,4 @@ def statistic_report():
     return {
         'count_by_day': sr.get_svg_count_by_day(),
         'count_by_month': sr.get_svg_count_by_month(),
-        'mean': sr.get_svg_rolling_mean()
     }
