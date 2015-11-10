@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'profiles',
     'smuggler',
     'uploads',
+    'favorites',
 )
 
 MIDDLEWARE_CLASSES = (

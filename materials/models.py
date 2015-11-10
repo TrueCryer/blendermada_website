@@ -144,6 +144,9 @@ class Material(models.Model):
     def voted_users(self):
         return self.votes.values_list('user', flat=True)
 
+    def favorited_users(self):
+        return self.favorites.values_list('user', flat=True)
+
     def save(self, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)

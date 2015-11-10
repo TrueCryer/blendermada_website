@@ -29,12 +29,15 @@
     color: rgb(0, 0, 0);
 }
 .download-icon {
-    font-size:600%;
+    font-size:200%;
     line-height: 1.4;
 }
 .download-caption {
-    font-size:150%;
+    font-size:120%;
     line-height: 1.2;
+}
+.btn-download {
+    border-radius: 30px;
 }
 
 
