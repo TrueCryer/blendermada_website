@@ -35,7 +35,7 @@
                 {{ favorited_users }}
                 {% if user.is_authenticated and user.pk in material.favorited_users %}
                     <p class="text-center">
-                        <a class="btn btn-warning btn-block btn-download" href="{% url 'favorites_add' material.pk material.slug %}">
+                        <a class="btn btn-warning btn-block btn-download" href="{% url 'favorites_list' %}">
                             <span class="glyphicon glyphicon-star download-icon"></span>
                             <br/>
                             <span class="download-caption">FAVORITED</span>

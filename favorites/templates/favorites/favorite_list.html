@@ -1,5 +1,6 @@
 {% extends 'favorites/base.html' %}
 
+
 {% block content %}
 <div class="row"><div class="page-header">
     <h1>{{ user.username }}'s favorites</h1>
@@ -18,7 +19,7 @@
         <p>{{ fav.material.category }}</p>
       </div>
       <div class="media-right">
-        <p><a class="btn btn-error" href="{% url 'favorites_remove' fav.material.pk fav.material.slug %}">REMOVE</a></p>
+        <p><a class="btn btn-danger" href="{% url 'favorites_remove' fav.material.pk fav.material.slug %}">REMOVE</a></p>
       </div>
     </div>
   {% endfor %}

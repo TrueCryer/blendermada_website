@@ -22,6 +22,8 @@ def add_favorite(request, pk, slug):
 
 @login_required
 def remove_favorite(request, pk, slug):
+    mat = get_object_or_404(Material, pk=pk, slug=slug)
+    fav = Favorite.objects.filter(material=mat, user=request.user).delete()
     return HttpResponseRedirect(reverse('favorites_list'))
 
 
