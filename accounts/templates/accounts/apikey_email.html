@@ -1,0 +1,24 @@
+{% load url from future %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>API key for Blendermada client</title>
+</head>
+
+<body>
+  <p>
+    You new API key for Blendermada client is <i>{{ apikey }}</i>
+  </p>
+  <p>
+    Use it when you activate add-on in settings panel.
+  </p>
+  <p>
+    If you haven't got client, get the newest version <a href="http://{{ site.domain }}{% url 'addon' %}">here</a>.
+  </p>
+  <p>
+      Sincerely, Blendermada's administration.
+  </p>
+</body>
+
+</html>

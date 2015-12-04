@@ -1,0 +1,9 @@
+{% load url from future %}
+
+You new API key for Blendermada client is {{ apikey }}
+
+Use it when you activate add-on in settings panel.
+
+If you haven't got client, get the newest version here - http://{{ site.domain }}{% url 'addon' %}
+
+Sincerely, Blendermada's administration.

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, RedirectView
 
 from core.views import LoginRequiredMixin
 from profiles.models import UserProfile
@@ -16,7 +16,7 @@ from .forms import (
     PasswordChangeFormBootstrap,
     SettingsForm,
 )
-from .models import RegistrationProfile
+from .models import RegistrationProfile, ApiKey
 from .settings import REGISTRATION_OPEN, SEND_ACTIVATION_EMAIL
 
 
@@ -193,3 +193,15 @@ class SettingsView(LoginRequiredMixin, FormView):
             'twitter': user.profile.twitter,
             'gplus': user.profile.gplus,
         }
+
+
+class GenerateApikeyView(LoginRequiredMixin, RedirectView):
+    pattern_name = 'account_home'
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        key, created = ApiKey.objects.get_or_create(user=self.request.user)
+        #print(key)
+        key.generate()
+        key.send_key_email()
+        return super(GenerateApikeyView, self).get_redirect_url(*args, **kwargs)

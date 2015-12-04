@@ -132,3 +132,43 @@ class RegistrationProfile(models.Model):
             email_message.attach_alternative(message_html, 'text/html')
 
         email_message.send()
+
+
+@python_2_unicode_compatible
+class ApiKey(models.Model):
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='key')
+    key = models.CharField('Key', max_length=32)
+
+    def __str__(self):
+        return '{}: {}'.format(self.user, self.key)
+
+    def generate(self):
+        self.key = hashlib.sha1(six.text_type(random.random()).encode('ascii')).hexdigest()
+        self.save()
+
+    def send_key_email(self, request=None):
+        ctx_dict = {}
+        if request is not None:
+            ctx_dict = RequestContext(request, ctx_dict)
+        ctx_dict.update({
+            'site': get_current_site(request),
+            'user': self.user,
+            'apikey': self.key,
+        })
+        subject = REGISTRATION_EMAIL_SUBJECT_PREFIX + render_to_string('accounts/apikey_email_subject.txt', ctx_dict)
+        # Email subject *must not* contain newlines
+        subject = ''.join(subject.splitlines())
+
+        message_txt = render_to_string('accounts/apikey_email.txt', ctx_dict)
+        email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [self.user.email])
+
+        try:
+            message_html = render_to_string('accounts/apikey_email.html', ctx_dict)
+        except TemplateDoesNotExist:
+            message_html = None
+
+        if message_html:
+            email_message.attach_alternative(message_html, 'text/html')
+
+        email_message.send()

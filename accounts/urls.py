@@ -7,6 +7,7 @@ from .views import (
     password_reset, password_reset_done, password_reset_confirm, password_reset_complete,
     password_change, password_change_done,
     HomeView, StatisticsView, MaterialsView, SettingsView, UploadsView,
+    GenerateApikeyView,
 )
 
 
@@ -43,4 +44,6 @@ urlpatterns = [
     url(r'^statistics/$', StatisticsView.as_view(), name='account_statistics'),
     url(r'^notifications/$', SettingsView.as_view(), name='account_settings'),
     url(r'^uploads/$', UploadsView.as_view(), name='account_uploads'),
+
+    url(r'^apikey/generate/$', GenerateApikeyView.as_view(), name='account_generate_apikey')
 ]
