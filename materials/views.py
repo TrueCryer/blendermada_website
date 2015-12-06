@@ -10,7 +10,7 @@ from django.template import loader, RequestContext
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
-from core.views import JsonResponseMixin
+from core.views import JsonResponseMixin, APIKeyMixin
 
 from .models import Category, Material, Statistic, Vote
 from . import settings
@@ -196,6 +196,22 @@ class ApiStatisticsJson(JsonResponseMixin, ArgumentsMixin, ListView):
              'count': stat.count} for stat in self.object_list
         ]
         return context
+
+
+class ApiFavoritesJson(JsonResponseMixin, APIKeyMixin, ArgumentsMixin, ListView):
+    queryset = Material.objects.published()
+    mapping = (
+        ('engine', 'engine'),
+    )
+
+    def get_queryset(self):
+        queryset = super(ApiFavoritesJson, self).get_queryset()
+        queryset = queryset.filter(pk__in=self.api_user.favorites.all().values_list('material__pk', flat=True))
+        return queryset.filter(**self.arguments)
+
+    def get_context_data(self, **kwargs):
+        answer = [{'id': mat.pk, 'slug': mat.slug, 'name': mat.name} for mat in self.object_list]
+        return answer
 
 
 class ApiCommentNotify(JsonResponseMixin, DetailView):

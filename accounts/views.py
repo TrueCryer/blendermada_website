@@ -201,7 +201,6 @@ class GenerateApikeyView(LoginRequiredMixin, RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         key, created = ApiKey.objects.get_or_create(user=self.request.user)
-        #print(key)
         key.generate()
         key.send_key_email()
         return super(GenerateApikeyView, self).get_redirect_url(*args, **kwargs)
