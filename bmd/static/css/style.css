@@ -44,7 +44,3 @@ body {
     text-shadow: black 0.1em 0.1em 0.3em;
     text-align: center;
 }
-
-.navbar-inverse .navbar-nav > .active > a {
-    border-bottom: 3px solid #337AB7;
-}
