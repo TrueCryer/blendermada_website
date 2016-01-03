@@ -13,8 +13,8 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-5">
-        <p class="text-center"><a href="{{ material.thumb_big.url }}">
-            <img class="img-responsive img-thumbnail" src="{{ material.thumb_medium.url }}" alt="{{ material.name }}" />
+        <p class="text-center"><a href="#" type="button" data-toggle="modal" data-target="#modalPreview">
+            <img class="img-responsive" src="{{ material.thumb_medium.url }}" alt="{{ material.name }}" />
         </a></p>
     </div>
 
@@ -123,4 +123,25 @@
     <h2>Comments</h2>
     {% if not debug %}{% include "materials/comments.html" %}{% else %}<p>Comments block by Disqus</p>{% endif %}
 </div></div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalPreview" tabindex="-1" role="dialog" aria-labelledby="modalPreviewLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-md">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalPreviewLabel">{{ material.name }}</h4>
+      </div>
+      <div class="modal-body">
+        <img class="img-responsive" src="{{ material.thumb_big.url }}" alt="{{ material.name }}" />
+      </div>
+      <div class="modal-footer">
+        <a id="modalDownload" class=" btn btn-success" href="{{ material.get_download_url }}">
+          <span class="glyphicon glyphicon-download download-icon"></span> <span class="download-caption">Download</span>
+        </a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
