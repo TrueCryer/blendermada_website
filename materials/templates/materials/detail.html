@@ -118,6 +118,10 @@
 </div></div>
 
 <hr/>
+{% if not debug %}
+  {% include 'adsense.html' %}
+  <hr/>
+{% endif %}
 
 <div class="row"><div class="col-xs-12">
     <h2>Comments</h2>

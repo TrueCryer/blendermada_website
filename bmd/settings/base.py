@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'mailing',
     'materials',
     'profiles',
-    'smuggler',
     'uploads',
     'favorites',
 )

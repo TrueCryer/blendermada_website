@@ -10,7 +10,6 @@ from bmd.sitemaps import sitemaps
 
 urlpatterns = [
 
-    url(r'^admin/', include('smuggler.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^materials/', include('materials.urls')),
     url(r'^account/', include('accounts.urls')),

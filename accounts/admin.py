@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import RegistrationProfile
+from .models import RegistrationProfile, ApiKey
 
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -24,3 +24,4 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(RegistrationProfile, RegistrationAdmin)
+admin.site.register(ApiKey)
