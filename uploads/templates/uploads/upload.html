@@ -38,8 +38,6 @@
         <li>File should contains only one material to render. It can contains more, but to postprocessing, render
             publishing will be pushed only one material.</li>
         <li>Please, make file as small as possible. Keep server's disk space.</li>
-        <li>Because of copyright problem we currently don't accept image textures. Material can contains only
-            procedural textures. All images from .blend file will be removed while preprocessing.</li>
         <li>All materials will be published under CC-0 license.</li>
     </ul>
 </div></div>
@@ -48,7 +46,7 @@
 	<form class="form-horizontal" role="form" enctype="multipart/form-data" action="{% url 'uploads_upload' %}" method="post">
         {% csrf_token %}
 		{% for field in form %}
-		<div class="form-group{% if field.errors %} error {% endif %}">
+		<div class="form-group{% if field.errors %} has-error {% endif %}">
 			<label class="col-xs-12 col-sm-2 control-label">
 				{{ field.label }}
 				{% if field.errors %}

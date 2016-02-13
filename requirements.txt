@@ -1,0 +1,9 @@
+# production
+Django>=1.8
+django-simple-captcha>=0.4
+html2text>=2015
+
+# statistics
+pandas>=0.17
+django-pandas>=0.4
+pygal>=2.0
