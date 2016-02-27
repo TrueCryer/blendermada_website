@@ -10,14 +10,17 @@
     </h1>
 </div></div>
 
-<div class="row"><div class="col-xs-12">
-  {% include 'ads/adsense.html' %}
-</div></div>
+
 
 {% load materials_tags %}
 <div class="row">
     {% if page.object_list %}
         {% for obj in page.object_list %}
+            {% if forloop.counter0|divisibleby:"6" %}
+                <div class="row"><div class="col-xs-12">
+                    {% include 'ads/adsense.html' %}
+                </div></div>
+            {% endif %}
             <div class="col-xs-12 col-sm-6 col-md-4 material-thumb">
                 <a href="{{ obj.get_absolute_url }}" class="thumbnail material-thumb">
                     <div class="caption text-center">
@@ -49,7 +52,7 @@
 </div>
 
 <div class="row"><div class="col-xs-12">
-  {% include 'ads/insticator_horizontal.html' %}
+    {% include 'ads/adsense.html' %}
 </div></div>
 
 <div class="row text-center">
@@ -77,10 +80,9 @@
 
     <ul class="pagination">
         <li class="disabled"><a>Items per page: </a></li>
-        <li class="{% if num == 12 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num=12">12</a></li>
-        <li class="{% if num == 24 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num=24">24</a></li>
-        <li class="{% if num == 48 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num=48">48</a></li>
-        <li class="{% if num == 96 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num=96">96</a></li>
+        <li class="{% if num == 12 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num={{ 12 }}">{{ 12 }}</a></li>
+        <li class="{% if num == 24 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num={{ 24 }}">{{ 24 }}</a></li>
+        <li class="{% if num == 48 %}active{% endif %}"><a href="?{{ queries_without_num.urlencode }}&amp;num={{ 48 }}">{{ 48 }}</a></li>
     </ul>
 
 </div>
