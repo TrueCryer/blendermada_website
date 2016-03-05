@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ object.username }}'s profile - detail{% endblock %}
+{% block title %}{{ object.username }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 <div class="row">

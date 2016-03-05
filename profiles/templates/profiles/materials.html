@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ object.username }}'s profile - materials{% endblock %}
+{% block title %}Materials | {{ object.username }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 <div class="row"><div class="page-header">

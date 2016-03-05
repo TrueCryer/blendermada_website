@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ object.name }} by {{ object.author }} - {% endblock %}
+{% block title %}{{ object.name }} by {{ object.author }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 <div class="row"><div class="page-header">

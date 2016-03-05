@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Materials, page {{ page.number }} - {% endblock %}
+{% block title %}
+{% if page.number > 1 %}Materials, Page {{ page.number }} | {{ block.super }}
+{% else %}Materials | {{ block.super }}{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="row"><div class="page-header">
