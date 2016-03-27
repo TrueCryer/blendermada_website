@@ -20,6 +20,7 @@ urlpatterns = [
 
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^addon/$', TemplateView.as_view(template_name='addon.html'), name='addon'),
+    url(r'^addon/changelog/$', TemplateView.as_view(template_name='changelog.html'), name='addon_changelog'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
 
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

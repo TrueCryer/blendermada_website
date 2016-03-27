@@ -1,0 +1,29 @@
+
+
+<div id="kham" class="navbar navbar-inverse navbar-fixed-bottom" style="color:white;display:none;">
+  <div class="container">
+  <div class="col-xs-12 col-sm-8">
+    <h3><a href="http://khamedovcrowdfunding.blendermada.com/">Cancer!</a></h3>
+    <p>My friend, classmate, opensource fan and just a good man got a brain cancer.</p>
+    <p>Therapy is expensive and we opened crowdfunding to help him.</p>
+    <p>Follow <a href="http://khamedovcrowdfunding.blendermada.com/">@KhamedovCrowdfunding</a></p>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+      <a href="http://khamedovcrowdfunding.blendermada.com/"><img class="img" style="margin-left: auto; margin-right: auto; max-width: 100%;" src="https://scontent-mxp1-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-0/q83/s480x480/1914343_962447843810017_5342061473867671484_n.jpg?oh=252dd240afc904f6b248d33cb17a17ed&oe=574AD8B8" /></a>
+  </div>
+  <div class="col-xs-12">
+      <p class="text-center"><a href="#" id="kham_close"><span class="glyphicon glyphicon-chevron-down"></span> close</a></p>
+  </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function() {
+      if ($.cookie("kham") != 1) {
+        $("#kham").delay(5000).slideDown();
+        $("#kham_close").click(function () {
+            $.cookie("kham", 1, {expires:1});
+            $("#kham").slideUp();
+        });
+      };
+    });
+</script>
