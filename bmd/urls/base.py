@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^uploads/', include('uploads.urls')),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^favorites/', include('favorites.urls')),
+    url(r'^blog/', include('blog.urls')),
 
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^addon/$', TemplateView.as_view(template_name='addon.html'), name='addon'),

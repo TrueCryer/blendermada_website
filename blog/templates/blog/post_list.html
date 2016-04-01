@@ -3,12 +3,25 @@
 {% block title %}Blog | {{ block.super }}{% endblock %}
 
 {% block content %}
+    <div class="row"><div class="page-header">
+        <h1>Blendermada blog</h1>
+    </div></div>
     {% for post in object_list %}
-    <div>
-        <h3>{{ post.title }}</h3>
-        <div>{{ post.tease|safe }}</div>
-        <a href="{{ post.get_absolute_url }}">Читать далее...</a>
-        <hr/>
-    </div>
+    <div class="row"><div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{ post.title }}<span class="pull-right"><em>{{ post.publish|date:"Y-m-d" }}</em></span></h2>
+            </div>
+            <div class="panel-body">
+                {{ post.tease|safe }}
+                <a href="{{ post.get_absolute_url }}">Read more...</a>
+            </div>
+            <div class="panel-footer">
+                {% for cat in post.categories.all %}
+                    <span class="label label-primary">{{ cat }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div></div>
     {% endfor %}
 {% endblock %}

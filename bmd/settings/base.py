@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'accounts',
+    'blog',
     'captcha',
     'core',
     'mailing',
