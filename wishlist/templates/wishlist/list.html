@@ -1,0 +1,17 @@
+{% extends 'wishlist/base.html' %}
+
+{% block title %}
+{% if page.number > 1 %}Wishes, Page {{ page.number }} | {{ block.super }}
+{% else %}Wishes | {{ block.super }}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <p>Image</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8">
+        <p>Description</p>
+    </div>
+</div>
+{% endblock %}
