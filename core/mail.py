@@ -3,13 +3,12 @@ from html2text import html2text
 from django.conf import  settings
 from django.core.mail import send_mail, get_connection
 from django.core.mail.message import EmailMultiAlternatives
-from django.template import Context, loader
+from django.template import loader
 
 
 def send_templated_mail(subject, template, context, to):
     t = loader.get_template(template)
-    c = Context(context)
-    send_mail(subject, t.render(c), settings.DEFAULT_FROM_EMAIL, to, fail_silently=True)
+    send_mail(subject, t.render(context), settings.DEFAULT_FROM_EMAIL, to, fail_silently=True)
 
 
 def send_mass_html_mail(datatuple, fail_silently=False, auth_user=None,

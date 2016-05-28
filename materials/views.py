@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.template import loader, RequestContext
+from django.template import loader
 from django.utils import timezone
 from django.views.generic import DetailView, ListView
 
@@ -48,7 +48,8 @@ def index(request):
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
     t = loader.get_template('materials/list.html')
-    c = RequestContext(request, {
+    c = {
+        'request': request,
         'page': page,
         'num': num,
         'queries_without_page': queries_without_page,
@@ -56,7 +57,7 @@ def index(request):
         'engine': engine,
         'category': category,
         'keyword': keyword,
-    })
+    }
     return HttpResponse(t.render(c))
 
 
