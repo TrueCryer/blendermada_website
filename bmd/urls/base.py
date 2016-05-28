@@ -3,9 +3,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django.contrib.sitemaps.views import sitemap as sitemap_view
+
 from django.views.generic import TemplateView
 
 from bmd.sitemaps import sitemaps
+
 
 
 urlpatterns = [
@@ -24,7 +27,7 @@ urlpatterns = [
     url(r'^addon/changelog/$', TemplateView.as_view(template_name='changelog.html'), name='addon_changelog'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
 
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^sitemap\.xml$', sitemap_view, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
 

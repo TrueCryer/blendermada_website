@@ -4,7 +4,7 @@ from html2text import html2text
 
 from django.conf import settings
 from django.db import models
-from django.template import Context, Template
+from django.template import Template
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.contrib.auth import get_user_model
@@ -55,8 +55,8 @@ class Mail(models.Model):
         recipients = self.get_recipients()
         sended_mails = send_mass_html_mail(
             [(
-                 Template(self.subject).render(Context({'recipient': recipient})),
-                 Template(self.message).render(Context({'recipient': recipient})),
+                 Template(self.subject).render({'recipient': recipient}),
+                 Template(self.message).render({'recipient': recipient}),
                  settings.DEFAULT_FROM_EMAIL,
                  [recipient.email],
              ) for recipient in recipients],
