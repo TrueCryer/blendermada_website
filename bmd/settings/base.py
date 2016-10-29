@@ -1,7 +1,6 @@
 import os
 
 from django.core.urlresolvers import reverse_lazy
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 
 DEBUG = True
