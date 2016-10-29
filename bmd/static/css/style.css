@@ -3,6 +3,10 @@ body {
     padding-top: 50px;
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'BFont'!important;
+}
+
 @font-face{
     font-family:'BFont';
     src: url(../fonts/bfont.eot);
@@ -15,21 +19,25 @@ body {
 .footer {
     margin: 0 0 0 0;
     padding: 20px 0;
-    background: #101010;
+    background: #2c3e50;
     width: 100%;
-    color: #9D9D9D;
+    color: #ffffff;
     border: 1px;
     border-color: #202020;
 }
 
 .footer a {
-    color: #FFF;
+    color: #18bc9c;
 }
 
 .subfooter {
     margin: 60px 0 0 0;
-    background: #808080;
+    background: #14982;
     color: #FFFFFF;
+}
+
+.subfooter a {
+    color: #2c3e50;
 }
 
 .jumbotron {
