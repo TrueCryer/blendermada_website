@@ -1,6 +1,14 @@
 {% extends 'blog/base.html' %}
 
+{% block title %}{{ object.title }} | {{ block.super }}{% endblock %}
+
 {% block content %}
-    <h1>{{ object.title }}</h1>
-    <div>{{ object.body }}</div>
+    <div class="row"><div class="page-header">
+        <h1>{{ object.title }}</h1>
+        <p>by {{ object.author }}, <em>{{ post.publish|date:"d-m-Y" }}</em></p>
+    </div></div>
+    <div class="row"><div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
+        {{ object.body|safe }}
+    </div></div>
+    <hr/>
 {% endblock %}

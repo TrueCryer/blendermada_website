@@ -2,6 +2,7 @@
 {% url 'materials_index' as url_materials %}
 {% url 'addon' as url_addon %}
 {% url 'about' as url_about %}
+{% url 'blog_post_list' as url_blog %}
 
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -20,6 +21,7 @@
                 <li class="divider"></li>
                 <li class="{% active request url_materials %}"><a href="{{ url_materials }}"><span class="glyphicon glyphicon-search"></span> Browse materials</a></li>
                 <li class="{% active request url_addon %}"><a href="{{ url_addon }}"><span class="glyphicon glyphicon-cog"></span> Add-on</a></li>
+                <li class="{% active request url_addon %}"><a href="{{ url_blog }}"><span class="glyphicon glyphicon-pencil"></span> Blog</a></li>
                 <li class="{% active request url_about %}"><a href="{{ url_about }}"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
