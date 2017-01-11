@@ -21,7 +21,7 @@
         <p>{{ fav.material.category }}</p>
       </div>
       <div class="media-right">
-        <p><a class="btn btn-danger" href="{% url 'favorites_remove' fav.material.pk fav.material.slug %}">REMOVE</a></p>
+        <p><a class="btn btn-danger" href="{% url 'favorites:remove' fav.material.pk fav.material.slug %}">REMOVE</a></p>
       </div>
     </div>
   {% endfor %}

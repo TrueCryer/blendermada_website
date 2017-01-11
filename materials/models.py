@@ -124,11 +124,11 @@ class Material(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('materials_detail', [], {'pk':self.pk, 'slug':self.slug})
+        return ('materials:detail', [], {'pk':self.pk, 'slug':self.slug})
 
     @models.permalink
     def get_download_url(self):
-        return ('materials_download', [], {'pk':self.pk, 'slug':self.slug})
+        return ('materials:download', [], {'pk':self.pk, 'slug':self.slug})
 
     def update_downloads(self):
         self.downloads = self.statistics.aggregate(models.Sum('count'))['count__sum'] or 0

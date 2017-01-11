@@ -18,7 +18,7 @@ class MaterialListSitemap(Sitemap):
         return paginator.page_range
 
     def location(self, page):
-        return '%s?page=%s' % (reverse_lazy('materials_index'), page)
+        return '%s?page=%s' % (reverse_lazy('materials:index'), page)
 
 
 class MaterialDetailSitemap(Sitemap):

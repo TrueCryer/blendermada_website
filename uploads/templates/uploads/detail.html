@@ -45,7 +45,7 @@
         {% if object.user_approved %}
             <p>Approved by author</p>
         {% else %}
-            <p>Not approved by author, <a href="{% url 'uploads_approve' object.pk %}" class="btn btn-success">Approve</a></p>
+            <p>Not approved by author, <a href="{% url 'uploads:approve' object.pk %}" class="btn btn-success">Approve</a></p>
         {% endif %}
         {% if object.admin_approved %}
             <p>Approved by administration</p>

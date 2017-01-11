@@ -30,15 +30,15 @@ class UserProfile(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('profiles_detail', [], {'slug': self.user.username})
+        return ('profiles:detail', [], {'slug': self.user.username})
 
     @models.permalink
     def get_materials_url(self):
-        return ('profiles_materials', [], {'slug': self.user.username})
+        return ('profiles:materials', [], {'slug': self.user.username})
 
     @models.permalink
     def get_activities_url(self):
-        return ('profiles_activities', [], {'slug': self.user.username})
+        return ('profiles:activities', [], {'slug': self.user.username})
 
     def get_email_hash(self):
         m = md5(self.user.email.strip().lower().encode('utf-8'))
