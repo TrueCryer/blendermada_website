@@ -30,7 +30,7 @@ def add_domain(domain, url, secure=False):
 
 class LatestMaterialsFeed(Feed):
     title = 'New materials'
-    link = reverse_lazy('materials_index')
+    link = reverse_lazy('materials:index')
     description = 'New materials on Blendermada'
 
     def items(self):

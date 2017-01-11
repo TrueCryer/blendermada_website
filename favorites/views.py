@@ -17,14 +17,14 @@ def add_favorite(request, pk, slug):
         user=request.user, material=mat,
     )
     fav.save()
-    return HttpResponseRedirect(reverse('materials_detail', kwargs={'pk':pk, 'slug':slug}))
+    return HttpResponseRedirect(reverse('materials:detail', kwargs={'pk':pk, 'slug':slug}))
 
 
 @login_required
 def remove_favorite(request, pk, slug):
     mat = get_object_or_404(Material, pk=pk, slug=slug)
     fav = Favorite.objects.filter(material=mat, user=request.user).delete()
-    return HttpResponseRedirect(reverse('favorites_list'))
+    return HttpResponseRedirect(reverse('favorites:list'))
 
 
 class FavoritesList(ListView):

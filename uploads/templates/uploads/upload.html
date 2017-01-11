@@ -43,7 +43,7 @@
 </div></div>
 
 <div class="row"><div class="col-xs-12">
-	<form class="form-horizontal" role="form" enctype="multipart/form-data" action="{% url 'uploads_upload' %}" method="post">
+	<form class="form-horizontal" role="form" enctype="multipart/form-data" action="{% url 'uploads:upload' %}" method="post">
         {% csrf_token %}
 		{% for field in form %}
 		<div class="form-group{% if field.errors %} has-error {% endif %}">

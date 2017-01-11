@@ -103,7 +103,7 @@ class Upload(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('uploads_detail', [], {'pk':self.pk})
+        return ('uploads:detail', [], {'pk':self.pk})
 
     def get_css_class(self):
         return CSS_STATUS_MAPPING[self.status]

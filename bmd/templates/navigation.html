@@ -1,5 +1,5 @@
 {% load core_tags %}
-{% url 'materials_index' as url_materials %}
+{% url 'materials:index' as url_materials %}
 {% url 'addon' as url_addon %}
 {% url 'about' as url_about %}
 {% url 'blog_post_list' as url_blog %}
@@ -31,8 +31,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ user.profile.get_absolute_url }}"><span class="glyphicon glyphicon-eye-open"></span> My profile</a></li>
                         <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Account</a></li>
-                        <li><a href="{% url 'favorites_list' %}"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
-                        <li><a href="{% url 'uploads_upload' %}"><span class="glyphicon glyphicon-upload"></span> Upload new material</a></li>
+                        <li><a href="{% url 'favorites:list' %}"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                        <li><a href="{% url 'uploads:upload' %}"><span class="glyphicon glyphicon-upload"></span> Upload new material</a></li>
                         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>

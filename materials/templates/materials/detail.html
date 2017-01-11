@@ -31,7 +31,7 @@
                 {{ favorited_users }}
                 {% if user.is_authenticated and user.pk in material.favorited_users %}
                     <p class="text-center">
-                        <a class="btn btn-warning btn-block btn-download" href="{% url 'favorites_list' %}">
+                        <a class="btn btn-warning btn-block btn-download" href="{% url 'favorites:list' %}">
                             <span class="glyphicon glyphicon-star download-icon"></span>
                             <br/>
                             <span class="download-caption">FAVORITED</span>
@@ -39,7 +39,7 @@
                     </p>
                 {% else %}
                     <p class="text-center">
-                        <a class="btn btn-default btn-block btn-download" href="{% url 'favorites_add' material.pk material.slug %}">
+                        <a class="btn btn-default btn-block btn-download" href="{% url 'favorites:add' material.pk material.slug %}">
                             <span class="glyphicon glyphicon-star-empty download-icon"></span>
                             <br/>
                             <span class="download-caption">FAVORITE</span>
@@ -58,11 +58,11 @@
                     {% else %}
                         <div class="text-center"><ul class="pagination pagination-sm">
                             <li class="active"><a>Vote: </a></li>
-                            <li><a href="{% url 'materials_vote' material.pk material.slug 1 %}">1</a></li>
-                            <li><a href="{% url 'materials_vote' material.pk material.slug 2 %}">2</a></li>
-                            <li><a href="{% url 'materials_vote' material.pk material.slug 3 %}">3</a></li>
-                            <li><a href="{% url 'materials_vote' material.pk material.slug 4 %}">4</a></li>
-                            <li><a href="{% url 'materials_vote' material.pk material.slug 5 %}">5</a></li>
+                            <li><a href="{% url 'materials:vote' material.pk material.slug 1 %}">1</a></li>
+                            <li><a href="{% url 'materials:vote' material.pk material.slug 2 %}">2</a></li>
+                            <li><a href="{% url 'materials:vote' material.pk material.slug 3 %}">3</a></li>
+                            <li><a href="{% url 'materials:vote' material.pk material.slug 4 %}">4</a></li>
+                            <li><a href="{% url 'materials:vote' material.pk material.slug 5 %}">5</a></li>
                         </ul></div>
                     {% endif %}
                 {% else %}

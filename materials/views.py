@@ -87,7 +87,7 @@ def vote(request, pk, slug, score):
     if not created:
         voting.score = score
         voting.save()
-    return HttpResponseRedirect(reverse('materials_detail', kwargs={'pk':pk, 'slug':slug}))
+    return HttpResponseRedirect(reverse('materials:detail', kwargs={'pk':pk, 'slug':slug}))
 
 
 ### API

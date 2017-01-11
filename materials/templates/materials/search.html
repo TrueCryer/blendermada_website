@@ -6,10 +6,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'uploads_upload' %}">Upload new material</a>
+        <a class="navbar-brand" href="{% url 'uploads:upload' %}">Upload new material</a>
     </div>
     <div class="collapse navbar-collapse" id="search-collapse">
-        <form role="search" class="navbar-form navbar-right" action="{% url 'materials_index' %}" method="get">
+        <form role="search" class="navbar-form navbar-right" action="{% url 'materials:index' %}" method="get">
             <div class="form-group">
                 <select class="form-control" name="engine" id="engine" placeholder="Engine">
                     <option value="">All Engines</option>
