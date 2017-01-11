@@ -10,7 +10,6 @@ from django.views.generic import TemplateView
 from bmd.sitemaps import sitemaps
 
 
-
 urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),

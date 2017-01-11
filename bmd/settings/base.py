@@ -42,15 +42,15 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
-    'accounts',
-    'blog',
     'captcha',
     'core',
-    'mailing',
-    'materials',
-    'profiles',
-    'uploads',
-    'favorites',
+    'accounts.apps.AccountsConfig',
+    'blog.apps.BlogConfig',
+    'favorites.apps.FavoritesConfig',
+    'mailing.apps.MailingConfig',
+    'materials.apps.MaterialsConfig',
+    'profiles.apps.ProfilesConfig',
+    'uploads.apps.UploadsConfig',
 )
 
 MIDDLEWARE_CLASSES = (
