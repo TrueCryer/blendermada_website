@@ -1,6 +1,5 @@
 from django.conf.urls import url
 
-from . import recievers
 from .views import MaterialDetailView, MaterialDownloadView, index, vote
 from .feed import LatestMaterialsFeed
 
