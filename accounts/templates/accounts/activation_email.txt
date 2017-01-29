@@ -1,5 +1,3 @@
-{% load url from future %}
-
 You (or someone pretending to be you) have asked to register an account at
 <a href="http://{{ site.domain }}/">Blendermada</a>.  If this weren't you, please ignore this email
 and your address will be removed from our records automatically.
