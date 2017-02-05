@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib import admin
 
 from .models import Category, Material, Statistic, Vote
@@ -18,12 +16,21 @@ class SlugAdmin(admin.ModelAdmin):
 
 
 class MaterialAdmin(SlugAdmin):
-    list_display = ('name', 'pk', 'category', 'engine', 'user', 'storage_name', 'downloads')
+    list_display = (
+        'name', 'pk', 'category', 'engine', 'user',
+        'storage_name', 'downloads'
+    )
     list_filter = ('engine', 'category')
+    list_per_page = 25
     search_fields = ('name',)
     fieldsets = (
         (None, {
-            'fields': (('name', 'slug'), 'description', ('engine', 'category'), ('user'))
+            'fields': (
+                ('name', 'slug'),
+                'description',
+                ('engine', 'category'),
+                ('user')
+            )
         }),
         ('Publish', {
             'classes': ('collapse',),
@@ -31,7 +38,11 @@ class MaterialAdmin(SlugAdmin):
         }),
         ('Files', {
             'classes': ('collapse',),
-            'fields': ('image', 'thumb_big', 'thumb_medium', 'thumb_small', 'storage', 'storage_name'),
+            'fields': (
+                'image',
+                'thumb_big', 'thumb_medium', 'thumb_small',
+                'storage', 'storage_name'
+            ),
         }),
     )
     readonly_fields = ('downloads',)

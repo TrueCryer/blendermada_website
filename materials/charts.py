@@ -19,4 +19,3 @@ def material_downloads(request, pk):
     chart.x_labels = df['date']
     chart.add('Material', df['count'])
     return response_svg_chart(chart)
-    

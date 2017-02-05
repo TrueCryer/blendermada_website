@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from collections import OrderedDict
 
 from django import forms
@@ -119,9 +117,11 @@ class RegistrationForm(forms.Form):
     captcha = CaptchaField()
 
     def clean_username(self):
-        existing = get_user_model().objects.filter(username__iexact=self.cleaned_data['username'])
+        existing = get_user_model().objects.filter(
+            username__iexact=self.cleaned_data['username'])
         if existing.exists():
-            raise forms.ValidationError('A user with that username already exists.')
+            raise forms.ValidationError(
+                'A user with that username already exists.')
         else:
             return self.cleaned_data['username']
 
@@ -131,13 +131,14 @@ class RegistrationForm(forms.Form):
         return self.cleaned_data['password2']
 
     def clean_email1(self):
-        if get_user_model().objects.filter(email__iexact=self.cleaned_data['email1']):
+        if get_user_model().objects.filter(
+            email__iexact=self.cleaned_data['email1']):
             raise forms.ValidationError(
                 'Already in use.')
         return self.cleaned_data['email1']
 
     def clean_email2(self):
-        if self.data['email1'] !=  self.data['email2']:
+        if self.data['email1'] != self.data['email2']:
             raise forms.ValidationError('Doesn\'t match')
         return self.cleaned_data['email2']
 
@@ -150,7 +151,9 @@ class AuthenticationFormBootstrap(AuthenticationForm):
         regex=r'^[\w.@+-]+$',
         max_length=30,
         label='Username',
-        error_messages={'invalid': 'This value may contain only letters, numbers and @/./+/-/_ characters.'},
+        error_messages={
+            'invalid': 'This value may contain only letters, numbers and @/./+/-/_ characters.',
+        },
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',

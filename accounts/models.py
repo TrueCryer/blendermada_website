@@ -13,10 +13,14 @@ from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.utils import six, timezone
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 from profiles.models import UserProfile
 
-from .settings import REGISTRATION_EMAIL_SUBJECT_PREFIX, ACCOUNT_ACTIVATION_DAYS
+from .settings import (
+    REGISTRATION_EMAIL_SUBJECT_PREFIX,
+    ACCOUNT_ACTIVATION_DAYS,
+)
 
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
@@ -48,11 +52,11 @@ class RegistrationManager(models.Manager):
         new_user.save()
 
         UserProfile.objects.filter(user=new_user).update(
-            country = cleaned_data['country'],
-            send_notifications = cleaned_data['send_notifications'],
-            send_newsletters = cleaned_data['send_newsletters'],
-            show_fullname = cleaned_data['show_fullname'],
-            show_email = cleaned_data['show_email'],
+            country=cleaned_data['country'],
+            send_notifications=cleaned_data['send_notifications'],
+            send_newsletters=cleaned_data['send_newsletters'],
+            show_fullname=cleaned_data['show_fullname'],
+            show_email=cleaned_data['show_email'],
         )
 
         registration_profile = self.create_profile(new_user)
@@ -77,9 +81,10 @@ class RegistrationManager(models.Manager):
             try:
                 if profile.activation_key_expired():
                     user = profile.user
-                    if not user.is_active:
+                    if not user.is_active:  # delete user with all stuff
                         user.delete()
-                    profile.delete()
+                    else:  # delete only profile, as not needed
+                        profile.delete()
             except get_user_model().DoesNotExist:
                 profile.delete()
 
@@ -88,14 +93,18 @@ class RegistrationManager(models.Manager):
 class RegistrationProfile(models.Model):
     ACTIVATED = "ALREADY_ACTIVATED"
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name='User', blank=True, null=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name=_('user'),
+    )
     activation_key = models.CharField('Activation key', max_length=40)
 
     objects = RegistrationManager()
 
     class Meta:
-        verbose_name = 'Registration profile'
-        verbose_name_plural = 'Registration profiles'
+        verbose_name = _('registration profile')
+        verbose_name_plural = _('registration profiles')
 
     def __str__(self):
         return 'Registration information for {}'.format(self.user)
@@ -137,7 +146,11 @@ class RegistrationProfile(models.Model):
 @python_2_unicode_compatible
 class ApiKey(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='key')
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name='key',
+        on_delete=models.CASCADE,
+    )
     key = models.CharField('Key', max_length=32)
 
     def __str__(self):

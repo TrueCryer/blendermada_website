@@ -1,16 +1,12 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
 
 from .managers import PublicManager
 
 
-@python_2_unicode_compatible
 class Category(models.Model):
     """Category model."""
     title = models.CharField(_('title'), max_length=100)
@@ -30,7 +26,6 @@ class Category(models.Model):
         return ('blog_category_detail', None, {'slug': self.slug})
 
 
-@python_2_unicode_compatible
 class Post(models.Model):
     """Post model."""
     STATUS_CHOICES = (
