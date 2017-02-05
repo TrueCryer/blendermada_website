@@ -13,6 +13,7 @@ from django.utils.text import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.utils.translation import ugettext_lazy as _
 
 from core.mail import send_templated_mail
 
@@ -29,12 +30,12 @@ def get_storage_filename(instance, filename):
 
 class Category(models.Model):
 
-    name = models.CharField('Name', max_length=25)
-    slug = models.SlugField('Slug')
+    name = models.CharField(_('name'), max_length=25)
+    slug = models.SlugField(_('slug'))
 
     class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
         ordering = ['name']
 
     def __str__(self):
@@ -44,12 +45,12 @@ class Category(models.Model):
 @python_2_unicode_compatible
 class Author(models.Model):
 
-    name = models.CharField('Name', max_length=50)
-    email = models.EmailField('E-mail', max_length=50)
+    name = models.CharField(_('name'), max_length=50)
+    email = models.EmailField(_('e-mail'), max_length=50)
 
     class Meta:
-        verbose_name = 'Author'
-        verbose_name_plural = 'Authors'
+        verbose_name = _('author')
+        verbose_name_plural = _('authors')
 
     def __str__(self):
         return '{name}, <{email}>'.format(name=self.name, email=self.email)
@@ -80,8 +81,16 @@ class Material(models.Model):
     name = models.CharField('Name', max_length=20)
     slug = models.SlugField('Slug')
     description = models.TextField('Description', blank=True)
-    author = models.ForeignKey(Author, related_name='materials', blank=True, null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='materials', blank=True, null=True)
+    author = models.ForeignKey(
+        Author,
+        related_name='materials',
+        blank=True, null=True
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='materials',
+        blank=True, null=True
+    )
     date = models.DateTimeField('Date', default=timezone.now)
     draft = models.BooleanField('Draft', default=True)
     storage = models.FileField(
@@ -120,23 +129,29 @@ class Material(models.Model):
         ordering = ['-date']
 
     def __str__(self):
-        return '{category} - {name}'.format(category=self.category, name=self.name)
+        return '{category} - {name}'.format(
+            category=self.category,
+            name=self.name,
+        )
 
     @models.permalink
     def get_absolute_url(self):
-        return ('materials:detail', [], {'pk':self.pk, 'slug':self.slug})
+        return ('materials:detail', [], {'pk': self.pk, 'slug': self.slug})
 
     @models.permalink
     def get_download_url(self):
-        return ('materials:download', [], {'pk':self.pk, 'slug':self.slug})
+        return ('materials:download', [], {'pk': self.pk, 'slug': self.slug})
 
     def update_downloads(self):
-        self.downloads = self.statistics.aggregate(models.Sum('count'))['count__sum'] or 0
-        print(self.downloads)
+        self.downloads = self.statistics.aggregate(
+            models.Sum('count')
+        )['count__sum'] or 0
         self.save()
 
     def update_rating(self):
-        self.rating = self.votes.aggregate(models.Avg('score'))['score__avg'] or 0
+        self.rating = self.votes.aggregate(
+            models.Avg('score')
+        )['score__avg'] or 0
         self.rating = round(self.rating, 2)
         self.votes_count = self.votes.count()
         self.save()

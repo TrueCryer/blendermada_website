@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect

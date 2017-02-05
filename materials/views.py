@@ -71,26 +71,30 @@ class MaterialDownloadView(DetailView):
 
     def get(self, request, *args, **kwargs):
         mat = self.get_object()
-        stat, created = Statistic.objects.get_or_create(material=mat, date=timezone.now())
+        stat, created = Statistic.objects.get_or_create(
+            material=mat, date=timezone.now()
+        )
         if not created:
             stat.count += 1
             stat.save()
-        return HttpResponse(mat.storage.read(), content_type='application/blender')
+        return HttpResponse(
+            mat.storage.read(), content_type='application/blender')
 
 
 @login_required
 def vote(request, pk, slug, score):
     mat = get_object_or_404(Material, pk=pk, slug=slug)
     voting, created = Vote.objects.get_or_create(
-        user=request.user, material=mat, defaults={'score':score},
+        user=request.user, material=mat, defaults={'score': score},
     )
     if not created:
         voting.score = score
         voting.save()
-    return HttpResponseRedirect(reverse('materials:detail', kwargs={'pk':pk, 'slug':slug}))
+    return HttpResponseRedirect(reverse(
+        'materials:detail', kwargs={'pk': pk, 'slug': slug}))
 
 
-### API
+# API
 
 class ArgumentsMixin(object):
     mapping = None
@@ -149,7 +153,9 @@ class ApiMaterialListJson(JsonResponseMixin, ArgumentsMixin, ListView):
     )
 
     def get_context_data(self, **kwargs):
-        answer = [{'id': mat.pk, 'slug': mat.slug, 'name': mat.name} for mat in self.object_list]
+        answer = [{'id': mat.pk,
+                   'slug': mat.slug,
+                   'name': mat.name} for mat in self.object_list]
         return answer
 
 
@@ -158,7 +164,9 @@ class ApiCategoryListJson(JsonResponseMixin, ArgumentsMixin, ListView):
     mapping = ()
 
     def get_context_data(self, **kwargs):
-        answer = [{'id': cat.pk, 'slug': cat.slug, 'name': cat.name} for cat in self.object_list]
+        answer = [{'id': cat.pk,
+                   'slug': cat.slug,
+                   'name': cat.name} for cat in self.object_list]
         return answer
 
 
@@ -199,7 +207,8 @@ class ApiStatisticsJson(JsonResponseMixin, ArgumentsMixin, ListView):
         return context
 
 
-class ApiFavoritesJson(JsonResponseMixin, APIKeyMixin, ArgumentsMixin, ListView):
+class ApiFavoritesJson(JsonResponseMixin, APIKeyMixin, ArgumentsMixin,
+                       ListView):
     queryset = Material.objects.published()
     mapping = (
         ('engine', 'engine'),
@@ -207,11 +216,15 @@ class ApiFavoritesJson(JsonResponseMixin, APIKeyMixin, ArgumentsMixin, ListView)
 
     def get_queryset(self):
         queryset = super(ApiFavoritesJson, self).get_queryset()
-        queryset = queryset.filter(pk__in=self.api_user.favorites.all().values_list('material__pk', flat=True))
+        queryset = queryset.filter(
+            pk__in=self.api_user.favorites.all().values_list(
+                'material__pk', flat=True))
         return queryset.filter(**self.arguments)
 
     def get_context_data(self, **kwargs):
-        answer = [{'id': mat.pk, 'slug': mat.slug, 'name': mat.name} for mat in self.object_list]
+        answer = [{'id': mat.pk,
+                   'slug': mat.slug,
+                   'name': mat.name} for mat in self.object_list]
         return answer
 
 
