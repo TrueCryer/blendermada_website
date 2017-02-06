@@ -115,6 +115,10 @@ class RegistrationProfile(models.Model):
                 (self.user.date_joined + expiration_date <= timezone.now()))
     activation_key_expired.boolean = True
 
+    def activated(self):
+        return self.user.is_active
+    activated.boolean = True
+
     def send_activation_email(self, request=None):
         ctx_dict = {}
         if request is not None:
