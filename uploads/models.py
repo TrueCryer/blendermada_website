@@ -1,13 +1,10 @@
-from __future__ import unicode_literals
-
 from uuid import uuid4
 from os import path
 
+from django.conf import settings
 from django.core.files import File
 from django.db import models
 from django.utils import timezone
-from django.conf import settings
-from django.utils.encoding import python_2_unicode_compatible
 
 from core.mail import send_templated_mail
 from materials.models import Material, Category
@@ -68,7 +65,6 @@ class UploadManager(models.Manager):
         return next_to_render
 
 
-@python_2_unicode_compatible
 class Upload(models.Model):
     name = models.CharField('Name', max_length=20)
     description = models.TextField('Description', blank=True)
@@ -145,7 +141,6 @@ class Upload(models.Model):
         self.save()
 
 
-@python_2_unicode_compatible
 class Scene(models.Model):
 
     engine = models.CharField('Engine version', max_length=6, choices=ENGINE_VERSIONS)

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import html2text
 from os import path
 from uuid import uuid4
@@ -7,12 +5,11 @@ import tempfile
 
 from PIL import Image
 
+from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.encoding import python_2_unicode_compatible
-from django.conf import settings
-from django.core.files.base import ContentFile
 from django.utils.translation import ugettext_lazy as _
 
 from core.mail import send_templated_mail
@@ -42,7 +39,6 @@ class Category(models.Model):
         return '{}'.format(self.name)
 
 
-@python_2_unicode_compatible
 class Author(models.Model):
 
     name = models.CharField(_('name'), max_length=50)
@@ -64,7 +60,6 @@ class MaterialManager(models.Manager):
         return self.filter(draft=False, **kwargs)
 
 
-@python_2_unicode_compatible
 class Material(models.Model):
 
     ENGINES = (
@@ -193,7 +188,6 @@ class Material(models.Model):
             )
 
 
-@python_2_unicode_compatible
 class Statistic(models.Model):
 
     material = models.ForeignKey(Material, related_name='statistics')
@@ -209,7 +203,6 @@ class Statistic(models.Model):
         return '{date} - {material}'.format(date=self.date, material=self.material)
 
 
-@python_2_unicode_compatible
 class Vote(models.Model):
 
     material = models.ForeignKey(Material, related_name='votes')
