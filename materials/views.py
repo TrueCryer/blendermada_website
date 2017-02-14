@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger

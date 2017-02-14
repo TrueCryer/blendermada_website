@@ -1,15 +1,11 @@
-from __future__ import unicode_literals
-
 from hashlib import md5
 
 from django.conf import settings
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 from core.settings import COUNTRIES
 
 
-@python_2_unicode_compatible
 class UserProfile(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile')

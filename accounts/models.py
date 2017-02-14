@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import hashlib
 import random
 import re
@@ -12,7 +10,6 @@ from django.db import models
 from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.utils import six, timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from profiles.models import UserProfile
@@ -89,7 +86,6 @@ class RegistrationManager(models.Manager):
                 profile.delete()
 
 
-@python_2_unicode_compatible
 class RegistrationProfile(models.Model):
     ACTIVATED = "ALREADY_ACTIVATED"
 
@@ -147,7 +143,6 @@ class RegistrationProfile(models.Model):
         email_message.send()
 
 
-@python_2_unicode_compatible
 class ApiKey(models.Model):
 
     user = models.OneToOneField(
