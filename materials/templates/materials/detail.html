@@ -25,7 +25,7 @@
                     <a class=" btn btn-success btn-block btn-download" href="{{ material.get_download_url }}">
                         <span class="glyphicon glyphicon-download download-icon"></span>
                         <br/>
-                        <span class="download-caption">DOWNLOAD</span>
+                        <span class="download-caption hidden-xs">DOWNLOAD</span>
                     </a>
                 </p>
                 {{ favorited_users }}
@@ -34,7 +34,7 @@
                         <a class="btn btn-warning btn-block btn-download" href="{% url 'favorites:list' %}">
                             <span class="glyphicon glyphicon-star download-icon"></span>
                             <br/>
-                            <span class="download-caption">FAVORITED</span>
+                            <span class="download-caption hidden-xs">FAVORITED</span>
                         </a>
                     </p>
                 {% else %}
@@ -42,7 +42,7 @@
                         <a class="btn btn-default btn-block btn-download" href="{% url 'favorites:add' material.pk material.slug %}">
                             <span class="glyphicon glyphicon-star-empty download-icon"></span>
                             <br/>
-                            <span class="download-caption">FAVORITE</span>
+                            <span class="download-caption hidden-xs">FAVORITE</span>
                         </a>
                     </p>
                 {% endif %}

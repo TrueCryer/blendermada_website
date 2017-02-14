@@ -26,8 +26,18 @@ def stars(material):
 
 
 @register.inclusion_tag('materials/last.html')
-def materials_last(number=6):
+def materials_last(number=2):
     materials = Material.objects.published()[:number]
     return {
+        'title': 'Latest materials',
+        'materials': materials,
+    }
+
+
+@register.inclusion_tag('materials/last.html')
+def materials_random(number=2):
+    materials = Material.objects.published().order_by('?')[:number]
+    return {
+        'title': 'Random materials',
         'materials': materials,
     }

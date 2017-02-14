@@ -1,21 +1,39 @@
 {% extends 'base.html' %}
 
 {% block jumbotron %}
-<div class="jumbotron">
+<div class="jumbotron"><div class="container">
     <h1>Welcome to Blendermada</h1>
-</div>
+    <p>Blendermada is Blender Material Database.</p>
+    <p>You can find here a lot of materials, download them absolutely freely and even get an addon to import anyone directly to Blender.</p>
+</div></div>
 {% endblock %}
 
 {% block content %}
 <div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-        <p>
-            Blendermada means Blender Material Database. Database contains materials for popular open-source 3D editor
-            <a href="http://blender.org/">Blender</a>.
-        </p>
+    <div class="col-xs-12 col-sm-8">
+        <h3>Blog, <small><a href="{% url 'blog:post_list' %}">see all &gt;</a></small></h3>
+        {% load blog_tags %}
+        {% posts_last %}
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        {% load materials_tags %}
+        {% materials_last %}
+        {% materials_random %}
+        <div class="row">
+            <p><a href="{% url 'materials:index' %}" class="btn btn-success">Browse all materials &gt;</a></p>
+        </div>
     </div>
 </div>
+
 <hr/>
+
+<div class="row"><div class="col-xs-12">
+    <h3>Blendermada on Twitter</h3>
+    {% if not debug %}{% include "twitter.html" %}{% else %}<p>Twitter's thread block</p>{% endif %}
+</div></div>
+
+<hr/>
+
 <div class="row">
     <div class="col-xs-12 col-sm-4">
         <h2>Different engines</h2>
@@ -50,16 +68,7 @@
         <p><a href="{% url 'addon' %}" class="btn btn-primary">Get add-on</a></p>
     </div>
 </div>
+
 <hr/>
-<div class="row">
-    <div class="col-xs-12 col-sm-8">
-        <h3>Latest materials, <small><a href="{% url 'materials:index' %}">browse all &gt;</a></small></h3>
-        {% load materials_tags %}
-        {% materials_last %}
-    </div>
-    <div class="col-xs-12 col-sm-4">
-        <h3>Blendermada on Twitter</h3>
-        {% if not debug %}{% include "twitter.html" %}{% else %}<p>Twitter's thread block</p>{% endif %}
-    </div>
-</div>
+
 {% endblock %}

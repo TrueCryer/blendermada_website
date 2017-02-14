@@ -1,20 +1,11 @@
 <div class="row">
+    <div class="col-xs-12"><h3>{{ title }}</h3></div>
+</div>
+<div class="row">
     {% for obj in materials %}
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-xs-12 col-sm-6">
             <a href="{{ obj.get_absolute_url }}" class="thumbnail">
-                <div class="caption text-center">
-                    <h8>{{ obj.name|truncatechars_html:20 }}</h8>
-                </div>
                 <img class="img" src="{{ obj.thumb_small.url }}" alt="{{ obj.name }}">
-                <div class="caption">
-                    <div class="pull-left">
-                        <p class="label label-success">{{ obj.get_engine_display }}</p>
-                    </div>
-                    <div class="pull-right">
-                        <p class="label label-default">{{ obj.category }}</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
             </a>
         </div>
     {% endfor %}
