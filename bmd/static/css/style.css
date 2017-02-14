@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .subfooter {
     margin: 60px 0 0 0;
-    background: #14982;
+    background: #149C82;
     color: #FFFFFF;
 }
 
@@ -43,12 +43,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .jumbotron {
     padding-top: 90px;
     padding-bottom: 90px;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
     background-image: url(../img/jumbo.jpg);
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
-    text-shadow: black 0.1em 0.1em 0.3em;
-    text-align: center;
+    text-align: right;
+}
+
+.jumbotron .container {
+    background-color: rgba(26, 36, 47, 0.7);
 }
