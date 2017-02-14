@@ -1,0 +1,15 @@
+<div class="row">
+    {% for post in posts %}
+        <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">{{ post.title }}<span class="pull-right"><em>{{ post.publish|date:"Y-m-d" }}</em></span></h2>
+            </div>
+            <div class="panel-body">
+                {{ post.tease|safe }}
+                <a href="{{ post.get_absolute_url }}">Read more...</a>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+</div>
