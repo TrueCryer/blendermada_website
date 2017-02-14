@@ -6,25 +6,27 @@ from .views import (CategoryListView,
                     PostDetailView) 
 
 
+app_name = 'blog'
+
 urlpatterns = [
     url(
         r'^categories/$',
         CategoryListView.as_view(),
-        name='blog_category_list',
+        name='category_list',
     ),
     url(
         r'^category/(?P<slug>[\w-]+)/$',
         CategoryDetailView.as_view(),
-        name='blog_category_detail',
+        name='category_detail',
     ),
     url(
         r'^$',
         PostListView.as_view(),
-        name='blog_post_list',
+        name='post_list',
     ),
     url(
         r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[\w-]+)/$',
         PostDetailView.as_view(),
-        name='blog_post_detail',
+        name='post_detail',
     ),
 ]

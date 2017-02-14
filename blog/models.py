@@ -23,7 +23,7 @@ class Category(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('blog_category_detail', None, {'slug': self.slug})
+        return ('blog:category_detail', None, {'slug': self.slug})
 
 
 class Post(models.Model):
@@ -57,7 +57,7 @@ class Post(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('blog_post_detail', None, {
+        return ('blog:post_detail', None, {
             'year': self.publish.year,
             'month': self.publish.month,
             'day': self.publish.day,
