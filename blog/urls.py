@@ -3,7 +3,7 @@ from django.conf.urls import url
 from .views import (CategoryListView,
                     CategoryDetailView,
                     PostListView,
-                    PostDetailView) 
+                    PostDetailView)
 
 
 app_name = 'blog'

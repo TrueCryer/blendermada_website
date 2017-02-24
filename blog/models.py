@@ -34,22 +34,38 @@ class Post(models.Model):
     )
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', blank=True, null=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='posts',
+        blank=True, null=True,
+    )
     body = models.TextField(_('body'))
-    tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
-    status = models.CharField(_('status'), max_length=2, choices=STATUS_CHOICES, default='d')
+    tease = models.TextField(
+        _('tease'),
+        blank=True,
+        help_text=_('Concise text suggested. Does not appear in RSS feed.'),
+    )
+    status = models.CharField(
+        _('status'),
+        max_length=2,
+        choices=STATUS_CHOICES,
+        default='d',
+    )
     allow_comments = models.BooleanField(_('allow comments'), default=True)
     publish = models.DateTimeField(_('publish'), default=timezone.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    categories = models.ManyToManyField(Category, blank=True, related_name='posts')
+    categories = models.ManyToManyField(
+        Category,
+        blank=True,
+        related_name='posts',
+    )
 
     objects = PublicManager()
 
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
-        ordering  = ('-publish',)
+        ordering = ('-publish',)
         get_latest_by = 'publish'
 
     def __str__(self):
