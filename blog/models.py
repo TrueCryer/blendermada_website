@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -21,9 +22,8 @@ class Category(models.Model):
     def __str__(self):
         return '{}'.format(self.title)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('blog:category_detail', None, {'slug': self.slug})
+        return reverse('blog:category_detail', kwargs={'slug': self.slug})
 
 
 class Post(models.Model):
@@ -34,34 +34,49 @@ class Post(models.Model):
     )
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(_('slug'), unique_for_date='publish')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', blank=True, null=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='posts',
+        blank=True, null=True,
+    )
     body = models.TextField(_('body'))
-    tease = models.TextField(_('tease'), blank=True, help_text=_('Concise text suggested. Does not appear in RSS feed.'))
-    status = models.CharField(_('status'), max_length=2, choices=STATUS_CHOICES, default='d')
+    tease = models.TextField(
+        _('tease'),
+        blank=True,
+        help_text=_('Concise text suggested. Does not appear in RSS feed.'),
+    )
+    status = models.CharField(
+        _('status'),
+        max_length=2,
+        choices=STATUS_CHOICES,
+        default='d',
+    )
     allow_comments = models.BooleanField(_('allow comments'), default=True)
     publish = models.DateTimeField(_('publish'), default=timezone.now)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    categories = models.ManyToManyField(Category, blank=True, related_name='posts')
+    categories = models.ManyToManyField(
+        Category,
+        blank=True,
+        related_name='posts',
+    )
 
     objects = PublicManager()
 
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
-        ordering  = ('-publish',)
+        ordering = ('-publish',)
         get_latest_by = 'publish'
 
     def __str__(self):
         return '{}'.format(self.title)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('blog:post_detail', None, {
+        return reverse('blog:post_detail', kwargs={
             'year': self.publish.year,
             'month': self.publish.month,
             'day': self.publish.day,
-            'slug': self.slug
+            'slug': self.slug,
         })
 
     def get_previous_post(self):

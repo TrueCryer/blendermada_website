@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, DateDetailView
 
-from .models import Category, Post 
+from .models import Category, Post
 
 
 class CategoryListView(ListView):

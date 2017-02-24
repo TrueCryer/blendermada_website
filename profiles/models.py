@@ -2,6 +2,7 @@ from hashlib import md5
 
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from core.settings import COUNTRIES
 
@@ -24,17 +25,20 @@ class UserProfile(models.Model):
     def __str__(self):
         return 'Account for {}'.format(self.user)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('profiles:detail', [], {'slug': self.user.username})
+        return reverse('profiles:detail', kwargs={
+            'slug': self.user.username,
+        })
 
-    @models.permalink
     def get_materials_url(self):
-        return ('profiles:materials', [], {'slug': self.user.username})
+        return reverse('profiles:materials', kwargs={
+            'slug': self.user.username,
+        })
 
-    @models.permalink
     def get_activities_url(self):
-        return ('profiles:activities', [], {'slug': self.user.username})
+        return reverse('profiles:activities', kwargs={
+            'slug': self.user.username,
+        })
 
     def get_email_hash(self):
         m = md5(self.user.email.strip().lower().encode('utf-8'))
