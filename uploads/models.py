@@ -4,6 +4,7 @@ from os import path
 from django.conf import settings
 from django.core.files import File
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from core.mail import send_templated_mail
@@ -97,9 +98,8 @@ class Upload(models.Model):
     def __str__(self):
         return '{name} by {author}, {date}'.format(name=self.name, author=self.author, date=self.date.strftime('%Y-%m-%d %H:%M:%S'))
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('uploads:detail', [], {'pk':self.pk})
+        return reverse('uploads:detail', kwargs={'pk': self.pk})
 
     def get_css_class(self):
         return CSS_STATUS_MAPPING[self.status]

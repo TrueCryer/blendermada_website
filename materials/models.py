@@ -8,6 +8,7 @@ from PIL import Image
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -129,13 +130,17 @@ class Material(models.Model):
             name=self.name,
         )
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('materials:detail', [], {'pk': self.pk, 'slug': self.slug})
+        return reverse('materials:detail', kwargs={
+            'pk': self.pk,
+            'slug': self.slug,
+        })
 
-    @models.permalink
     def get_download_url(self):
-        return ('materials:download', [], {'pk': self.pk, 'slug': self.slug})
+        return reverse('materials:download', kwargs={
+            'pk': self.pk,
+            'slug': self.slug,
+        })
 
     def update_downloads(self):
         self.downloads = self.statistics.aggregate(
