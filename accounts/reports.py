@@ -13,7 +13,7 @@ class UserReport(object):
     def __init__(self):
         self.df = read_frame(
             get_user_model().objects.filter(
-                date_joined__gte=(datetime.now()-timedelta(days=365))
+                date_joined__gte=(datetime.now() - timedelta(days=15))
             )
         )
         self.df['date_joined'] = pd.to_datetime(self.df['date_joined'])
@@ -33,7 +33,7 @@ class UserReport(object):
             show_legend=False
         )
         chart.title = "Registered users by day"
-        chart.x_labels = map(lambda d: d.strftime('%Y-%m-%d'), self.active.index)
+        chart.x_labels = map(lambda d: d.strftime('%d'), self.active.index)
         chart.add('Activated', self.active['id'])
         chart.add('Non-activated', self.nonactive['id'])
         return chart.render()
