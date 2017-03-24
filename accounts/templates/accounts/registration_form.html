@@ -3,26 +3,29 @@
 {% block title %}Register | {{ block.super }}{% endblock %}
 
 {% block content %}
-<div class="row"><div class="page-header">
+<div class="row">
+  <div class="page-header">
     <h1>Register a new account</h1>
-</div></div>
+  </div>
+</div>
 
 <div class="row">
-    <form role="form" method="post" action="" class="center-block">{% csrf_token %}
 
-        <div class="col-md-6">
+  <form role="form" method="post" action="" class="center-block">{% csrf_token %}
 
-            <div class="form-group col-lg-12 {% if form.username.errors %} error {% endif %}">
-                {% if form.username.errors %}
-			    <span class="help-inline text-danger">
-				    {% for error in  form.username.errors %}{{ error }}{% endfor %}
-                </span>
-                {% endif %}
-                {{ form.username.as_widget }}
-            </div>
+  <div class="col-md-6">
 
-            <div class="form-group col-lg-6 {% if form.password1.errors %} error {% endif %}">
-                {% if form.password1.errors %}
+    <div class="form-group col-lg-12 {% if form.username.errors %} error {% endif %}">
+      {% if form.username.errors %}
+        <span class="help-inline text-danger">
+          {% for error in  form.username.errors %}{{ error }}{% endfor %}
+        </span>
+      {% endif %}
+      {{ form.username.as_widget }}
+    </div>
+
+    <div class="form-group col-md-6 {% if form.password1.errors %} error {% endif %}">
+      {% if form.password1.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.password1.errors %}{{ error }}{% endfor %}
                 </span>
@@ -30,7 +33,7 @@
                 {{ form.password1.as_widget }}
             </div>
 
-            <div class="form-group col-lg-6 {% if form.password2.errors %} error {% endif %}">
+            <div class="form-group col-md-6 {% if form.password2.errors %} error {% endif %}">
                 {% if form.password2.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.password2.errors %}{{ error }}{% endfor %}
@@ -39,7 +42,7 @@
                 {{ form.password2.as_widget }}
             </div>
 
-            <div class="form-group col-lg-6 {% if form.email1.errors %} error {% endif %}">
+            <div class="form-group col-md-6 {% if form.email1.errors %} error {% endif %}">
                 {% if form.email1.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.email1.errors %}{{ error }}{% endfor %}
@@ -48,7 +51,7 @@
                 {{ form.email1.as_widget }}
             </div>
 
-            <div class="form-group col-lg-6 {% if form.email2.errors %} error {% endif %}">
+            <div class="form-group col-md-6 {% if form.email2.errors %} error {% endif %}">
                 {% if form.email2.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.email2.errors %}{{ error }}{% endfor %}
@@ -57,7 +60,16 @@
                 {{ form.email2.as_widget }}
             </div>
 
-            <div class="form-group col-lg-12 {% if form.first_name.errors %} error {% endif %}">
+            <div class="form-group col-xs-12"> 
+                <div class="checkbox">
+                    <label>
+                        {{ form.show_email.as_widget }}
+                        {{ form.show_email.label }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 {% if form.first_name.errors %} error {% endif %}">
                 {% if form.first_name.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.first_name.errors %}{{ error }}{% endfor %}
@@ -66,13 +78,22 @@
                 {{ form.first_name.as_widget }}
             </div>
 
-            <div class="form-group col-lg-12 {% if form.last_name.errors %} error {% endif %}">
+            <div class="form-group col-xs-12 {% if form.last_name.errors %} error {% endif %}">
                 {% if form.last_name.errors %}
 			    <span class="help-inline text-danger">
 				    {% for error in  form.last_name.errors %}{{ error }}{% endfor %}
                 </span>
                 {% endif %}
                 {{ form.last_name.as_widget }}
+            </div>
+
+            <div class="form-group col-xs-12">
+                <div class="checkbox">
+                    <label>
+                        {{ form.show_fullname.as_widget }}
+                        {{ form.show_fullname.label }}
+                    </label>
+                </div>
             </div>
 
             <div class="form-group col-lg-12 {% if form.country.errors %} error {% endif %}">
@@ -98,29 +119,17 @@
                         {{ form.send_notifications.label }}
                     </label>
                 </div>
-                <div class="checkbox">
-                    <label>
-                        {{ form.show_fullname.as_widget }}
-                        {{ form.show_fullname.label }}
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        {{ form.show_email.as_widget }}
-                        {{ form.show_email.label }}
-                    </label>
-                </div>
             </div>
 
             <div class="form-group col-lg-12 {% if form.captcha.errors %} error {% endif %}">
-                {{ form.captcha.label_tag }}
                 {% if form.captcha.errors %}
-			    <span class="help-inline text-danger">
-				    {% for error in  form.captcha.errors %}{{ error }}{% endfor %}
-                </span>
+			    <div class="col-xs-12 help-inline text-danger">
+				    {% for error in form.captcha.errors %}{{ error }}{% endfor %}
+                </div>
                 {% endif %}
                 {{ form.captcha.as_widget }}
             </div>
+
         </div>
 
         <div class="col-md-6">
