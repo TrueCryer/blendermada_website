@@ -47,7 +47,7 @@
             {% if user.is_authenticated %}
                 <p>Just go to the <a href="{% url 'uploads:upload' %}">upload section</a>.</p>
             {% else %}
-                <p>Just <a href="{% url 'login' %}">login</a> and go to the <a href="{% url 'uploads:upload' %}">upload section</a>.</p>
+                <p>Just <a href="{% url 'login' %}">sign in</a> and go to the <a href="{% url 'uploads:upload' %}">upload section</a>.</p>
             {% endif %}
         </div>
     {% endif %}

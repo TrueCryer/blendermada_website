@@ -33,11 +33,11 @@
                         <li><a href="{% url 'account_home' %}"><span class="glyphicon glyphicon-home"></span> Account</a></li>
                         <li><a href="{% url 'favorites:list' %}"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
                         <li><a href="{% url 'uploads:upload' %}"><span class="glyphicon glyphicon-upload"></span> Upload new material</a></li>
-                        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
                 {% endif %}
             </ul>
         </div>
