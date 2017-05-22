@@ -23,6 +23,12 @@ from .settings import (
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
 
+def make_api_key():
+    return hashlib.md5(
+        six.text_type(random.random()).encode('ascii')
+    ).hexdigest()
+
+
 class RegistrationManager(models.Manager):
 
     def activate_user(self, activation_key):
@@ -156,7 +162,7 @@ class ApiKey(models.Model):
         return '{}: {}'.format(self.user, self.key)
 
     def generate(self):
-        self.key = hashlib.sha1(six.text_type(random.random()).encode('ascii')).hexdigest()
+        self.key = make_api_key()
         self.save()
 
     def send_key_email(self, request=None):
