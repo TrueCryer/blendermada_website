@@ -72,3 +72,4 @@ media/
 # IDE preferences
 .idea/
 *.nja
+*.geany
