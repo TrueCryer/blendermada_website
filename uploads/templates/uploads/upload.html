@@ -3,7 +3,7 @@
 {% block title %}Upload new material | {{ block.super }}{% endblock %}
 
 {% block extra_js %}
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="//cdn.ckeditor.com/4.7.3/basic/ckeditor.js"></script>
 <script>tinymce.init({
     selector:"textarea",
     plugins: "advlist autolink charmap image link media table textcolor"
@@ -63,5 +63,7 @@
 		</div></div>
 	</form>
 </div></div>
-
+<script>
+  CKEDITOR.replace('id_description');
+</script>
 {% endblock %}
