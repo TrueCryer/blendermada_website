@@ -35,6 +35,8 @@ class StatisticReport(object):
     def get_svg_count_by_day(self):
 
         df = self.all_by_day[-15:]
+        df_mean_5 = self.all_by_day['count'].rolling(
+            window=5, center=False).apply(func=np.mean)[-15:].to_frame()
         df_mean_15 = self.all_by_day['count'].rolling(
             window=15, center=False).apply(func=np.mean)[-15:].to_frame()
         df_mean_30 = self.all_by_day['count'].rolling(
@@ -51,6 +53,7 @@ class StatisticReport(object):
         chart.title = "Count of downloads by day"
         chart.x_labels = map(lambda d: d.strftime('%d %b'), df.index)
         chart.add('Downloads', df['count'])
+        chart.add('5-days mean', df_mean_5['count'])
         chart.add('15-days mean', df_mean_15['count'])
         chart.add('30-days mean', df_mean_30['count'])
         chart.add('60-days mean', df_mean_60['count'])
