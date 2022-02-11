@@ -1,36 +1,36 @@
-from django.conf.urls import include, url
+from bmd.sitemaps import sitemaps
+from django.views.generic import TemplateView
+from django.contrib.sitemaps.views import sitemap as sitemap_view
+from django.urls import include, path
 
 from django.contrib import admin
 admin.autodiscover()
 
-from django.contrib.sitemaps.views import sitemap as sitemap_view
-
-from django.views.generic import TemplateView
-
-from bmd.sitemaps import sitemaps
-
 
 urlpatterns = [
 
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^materials/', include('materials.urls')),
-    url(r'^account/', include('accounts.urls')),
-    url(r'^profiles/', include('profiles.urls')),
-    url(r'^uploads/', include('uploads.urls')),
-    url(r'^captcha/', include('captcha.urls')),
-    url(r'^favorites/', include('favorites.urls')),
-    url(r'^blog/', include('blog.urls')),
+    path('admin/', admin.site.urls),
+    path('materials/', include('materials.urls')),
+    path('account/', include('accounts.urls')),
+    path('profiles/', include('profiles.urls')),
+    path('uploads/', include('uploads.urls')),
+    path('captcha/', include('captcha.urls')),
+    path('favorites/', include('favorites.urls')),
+    path('blog/', include('blog.urls')),
 
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^addon/$', TemplateView.as_view(template_name='addon.html'), name='addon'),
-    url(r'^addon/changelog/$', TemplateView.as_view(template_name='changelog.html'), name='addon_changelog'),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('/', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('addon/', TemplateView.as_view(template_name='addon.html'), name='addon'),
+    path('addon/changelog/',
+         TemplateView.as_view(template_name='changelog.html'), name='addon_changelog'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 
-    url(r'^sitemap\.xml$', sitemap_view, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml', sitemap_view, {
+        'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
-    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots'),
+    path('robots.txt', TemplateView.as_view(
+        template_name='robots.txt', content_type='text/plain'), name='robots'),
 
-    url(r'^api/materials/', include('materials.api')),
-    url(r'^api/uploads/', include('uploads.api')),
+    path('api/materials/', include('materials.api')),
+    path('api/uploads/', include('uploads.api')),
 
 ]

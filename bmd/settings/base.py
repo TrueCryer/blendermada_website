@@ -1,6 +1,6 @@
 import os
 
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 
 DEBUG = True
@@ -24,7 +24,7 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite'),
-    }
+         }
 }
 
 

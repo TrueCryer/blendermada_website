@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .managers import PublicManager
 
@@ -36,7 +36,7 @@ class Post(models.Model):
     slug = models.SlugField(_('slug'), unique_for_date='publish')
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='posts',
-        blank=True, null=True,
+        blank=True, null=True, on_delete=models.DO_NOTHING,
     )
     body = models.TextField(_('body'))
     tease = models.TextField(

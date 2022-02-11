@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.syndication.views import Feed
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import iri_to_uri
@@ -20,9 +20,10 @@ def add_domain(domain, url, secure=False):
         # Support network-path reference (see #16753) - RSS requires a protocol
         url = '{protocol}:{url}'.format(protocol=protocol, url=url)
     elif not (url.startswith('http://')
-            or url.startswith('https://')
-            or url.startswith('mailto:')):
-        url = iri_to_uri('{protocol}://{domain}{url}'.format(protocol=protocol, domain=domain, url=url))
+              or url.startswith('https://')
+              or url.startswith('mailto:')):
+        url = iri_to_uri(
+            '{protocol}://{domain}{url}'.format(protocol=protocol, domain=domain, url=url))
     return url
 
 
@@ -40,7 +41,8 @@ class LatestMaterialsFeed(Feed):
     def item_description(self, item):
         current_site = get_current_site(self.request)
         return description.format(
-            add_domain(current_site.domain, item.thumb_medium.url, self.request.is_secure()),
+            add_domain(current_site.domain, item.thumb_medium.url,
+                       self.request.is_secure()),
             item.category,
             item.get_engine_display(),
             item.description,

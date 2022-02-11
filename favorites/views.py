@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
@@ -15,7 +15,7 @@ def add_favorite(request, pk, slug):
         user=request.user, material=mat,
     )
     fav.save()
-    return HttpResponseRedirect(reverse('materials:detail', kwargs={'pk':pk, 'slug':slug}))
+    return HttpResponseRedirect(reverse('materials:detail', kwargs={'pk': pk, 'slug': slug}))
 
 
 @login_required

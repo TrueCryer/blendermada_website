@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import recievers
 from .views import DetailView, MaterialsView, ActivitiesView
@@ -8,8 +8,8 @@ app_name = 'profiles'
 
 urlpatterns = [
 
-    url(r'^(?P<slug>[\w.@+-]+)/detail/$', DetailView.as_view(), name='detail'),
-    url(r'^(?P<slug>[\w.@+-]+)/materials/$', MaterialsView.as_view(), name='materials'),
-    url(r'^(?P<slug>[\w.@+-]+)/activities/$', ActivitiesView.as_view(), name='activities'),
+    path('<slug:slug>/detail/$', DetailView.as_view(), name='detail'),
+    path('<slug:slug>/materials/$', MaterialsView.as_view(), name='materials'),
+    path('<slug:slug>/activities/$', ActivitiesView.as_view(), name='activities'),
 
 ]

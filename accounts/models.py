@@ -9,8 +9,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.template import RequestContext, TemplateDoesNotExist
 from django.template.loader import render_to_string
-from django.utils import six, timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from profiles.models import UserProfile
 
@@ -25,7 +25,7 @@ SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
 def make_api_key():
     return hashlib.md5(
-        six.text_type(random.random()).encode('ascii')
+        random.random().encode('ascii')
     ).hexdigest()
 
 
@@ -70,11 +70,9 @@ class RegistrationManager(models.Manager):
         return new_user
 
     def create_profile(self, user):
-        salt = hashlib.sha1(six.text_type(random.random()).encode('ascii')).hexdigest()[:5]
+        salt = hashlib.sha1(random.random().encode('ascii')).hexdigest()[:5]
         salt = salt.encode('ascii')
         username = user.username
-        if isinstance(username, six.text_type):
-            username = username.encode('utf-8')
         activation_key = hashlib.sha1(salt+username).hexdigest()
         return self.create(user=user,
                            activation_key=activation_key)
@@ -113,8 +111,8 @@ class RegistrationProfile(models.Model):
 
     def activation_key_expired(self):
         expiration_date = timezone.timedelta(days=ACCOUNT_ACTIVATION_DAYS)
-        return (self.activation_key == self.ACTIVATED or
-                (self.user.date_joined + expiration_date <= timezone.now()))
+        return (self.activation_key == self.ACTIVATED
+                or (self.user.date_joined + expiration_date <= timezone.now()))
     activation_key_expired.boolean = True
 
     def activated(self):
@@ -131,15 +129,19 @@ class RegistrationProfile(models.Model):
             'activation_key': self.activation_key,
             'expiration_days': ACCOUNT_ACTIVATION_DAYS,
         })
-        subject = REGISTRATION_EMAIL_SUBJECT_PREFIX + render_to_string('accounts/activation_email_subject.txt', ctx_dict)
+        subject = REGISTRATION_EMAIL_SUBJECT_PREFIX + \
+            render_to_string('accounts/activation_email_subject.txt', ctx_dict)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
 
-        message_txt = render_to_string('accounts/activation_email.txt', ctx_dict)
-        email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [self.user.email])
+        message_txt = render_to_string(
+            'accounts/activation_email.txt', ctx_dict)
+        email_message = EmailMultiAlternatives(
+            subject, message_txt, settings.DEFAULT_FROM_EMAIL, [self.user.email])
 
         try:
-            message_html = render_to_string('accounts/activation_email.html', ctx_dict)
+            message_html = render_to_string(
+                'accounts/activation_email.html', ctx_dict)
         except TemplateDoesNotExist:
             message_html = None
 
@@ -174,15 +176,18 @@ class ApiKey(models.Model):
             'user': self.user,
             'apikey': self.key,
         })
-        subject = REGISTRATION_EMAIL_SUBJECT_PREFIX + render_to_string('accounts/apikey_email_subject.txt', ctx_dict)
+        subject = REGISTRATION_EMAIL_SUBJECT_PREFIX + \
+            render_to_string('accounts/apikey_email_subject.txt', ctx_dict)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
 
         message_txt = render_to_string('accounts/apikey_email.txt', ctx_dict)
-        email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [self.user.email])
+        email_message = EmailMultiAlternatives(
+            subject, message_txt, settings.DEFAULT_FROM_EMAIL, [self.user.email])
 
         try:
-            message_html = render_to_string('accounts/apikey_email.html', ctx_dict)
+            message_html = render_to_string(
+                'accounts/apikey_email.html', ctx_dict)
         except TemplateDoesNotExist:
             message_html = None
 

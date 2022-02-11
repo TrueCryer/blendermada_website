@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import MaterialDetailView, MaterialDownloadView, index, vote
 from .feed import LatestMaterialsFeed
@@ -8,19 +8,19 @@ app_name = 'materials'
 
 urlpatterns = [
 
-    url(r'^$', index, name='index'),
+    path('', index, name='index'),
 
-    url(r'^detail/(?P<pk>\d+)-(?P<slug>[\w-]+)/$',
-        MaterialDetailView.as_view(),
-        name='detail'),
+    path('detail/<int:pk>-<slug:slug>/',
+         MaterialDetailView.as_view(),
+         name='detail'),
 
-    url(r'^download/(?P<pk>\d+)-(?P<slug>[\w-]+).blend$',
-        MaterialDownloadView.as_view(),
-        name='download'),
+    path('download/<int:pk>-<slug:slug>.blend',
+         MaterialDownloadView.as_view(),
+         name='download'),
 
-    url(r'^vote/(?P<pk>\d+)-(?P<slug>[\w-]+)/(?P<score>[1-5])/$',
-        vote,
-        name='vote'),
+    path('vote/<int:pk>-<slug:slug>/<score>/',
+         vote,
+         name='vote'),
 
-    url(r'^feed.rss$', LatestMaterialsFeed(), name='feed'),
+    path('feed.rss', LatestMaterialsFeed(), name='feed'),
 ]

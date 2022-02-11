@@ -1,6 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from django.core.paginator import Paginator
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from .models import Material
 from .settings import MATERIALS_PER_PAGE

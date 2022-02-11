@@ -1,5 +1,5 @@
 from django.contrib import sitemaps
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from materials.sitemaps import MaterialListSitemap, MaterialDetailSitemap
 from profiles.sitemaps import ProfileDetailSitemap

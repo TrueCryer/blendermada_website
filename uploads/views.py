@@ -1,6 +1,6 @@
 import base64
 
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http import HttpResponseForbidden, Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -95,9 +95,10 @@ class ApiGetUploadToRenderJson(SecretKeyMixin, JsonResponseMixin, TemplateView):
         return answer
 
 
-class  ApiUploadResultJson(SecretKeyMixin, JsonResponseMixin, TemplateView):
+class ApiUploadResultJson(SecretKeyMixin, JsonResponseMixin, TemplateView):
     def post(self, request, *args, **kwargs):
-        upload = get_object_or_404(Upload, pk=request.POST['id'], status__in=['w', 'r'])
+        upload = get_object_or_404(
+            Upload, pk=request.POST['id'], status__in=['w', 'r'])
         upload.render_finished = timezone.now()
         try:
             upload.storage = request.FILES['storage.blend']

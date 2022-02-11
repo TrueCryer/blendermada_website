@@ -11,7 +11,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from core.mail import send_templated_mail
 
@@ -73,19 +73,20 @@ class Material(models.Model):
     )
 
     engine = models.CharField('Render engine', max_length=3, choices=ENGINES)
-    category = models.ForeignKey(Category, related_name='materials')
+    category = models.ForeignKey(
+        Category, related_name='materials', on_delete=models.CASCADE)
     name = models.CharField('Name', max_length=20)
     slug = models.SlugField('Slug')
     description = models.TextField('Description', blank=True)
     author = models.ForeignKey(
         Author,
         related_name='materials',
-        blank=True, null=True
+        blank=True, null=True, on_delete=models.CASCADE,
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='materials',
-        blank=True, null=True
+        blank=True, null=True, on_delete=models.CASCADE,
     )
     date = models.DateTimeField('Date', default=timezone.now)
     draft = models.BooleanField('Draft', default=True)
@@ -195,7 +196,8 @@ class Material(models.Model):
 
 class Statistic(models.Model):
 
-    material = models.ForeignKey(Material, related_name='statistics')
+    material = models.ForeignKey(
+        Material, related_name='statistics', on_delete=models.CASCADE)
     date = models.DateField('Date', default=timezone.now)
     count = models.IntegerField('Count', default=1)
 
@@ -210,8 +212,10 @@ class Statistic(models.Model):
 
 class Vote(models.Model):
 
-    material = models.ForeignKey(Material, related_name='votes')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='votes')
+    material = models.ForeignKey(
+        Material, related_name='votes', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='votes', on_delete=models.CASCADE)
     score = models.PositiveIntegerField('Score')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

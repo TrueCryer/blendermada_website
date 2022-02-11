@@ -69,22 +69,31 @@ class UploadManager(models.Manager):
 class Upload(models.Model):
     name = models.CharField('Name', max_length=20)
     description = models.TextField('Description', blank=True)
-    uploaded_file = models.FileField('Uploaded file', upload_to=get_upload_filename)
+    uploaded_file = models.FileField(
+        'Uploaded file', upload_to=get_upload_filename)
     name_in_file = models.CharField('Material name in file', max_length=50)
-    engine = models.CharField('Engine version', max_length=6, choices=ENGINE_VERSIONS)
+    engine = models.CharField(
+        'Engine version', max_length=6, choices=ENGINE_VERSIONS)
     scene = models.CharField('Scene type', max_length=1, choices=SCENE_TYPES)
 
     date = models.DateTimeField('Upload date', default=timezone.now)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='uploads', blank=True, null=True)
-    status = models.CharField('Status', max_length=1, choices=PROCESS_STATUSES, default='w')
-    render_started = models.DateTimeField('Render started at', blank=True, null=True)
-    render_finished = models.DateTimeField('Render finished at', blank=True, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='uploads',
+                               blank=True, null=True, on_delete=models.CASCADE)
+    status = models.CharField('Status', max_length=1,
+                              choices=PROCESS_STATUSES, default='w')
+    render_started = models.DateTimeField(
+        'Render started at', blank=True, null=True)
+    render_finished = models.DateTimeField(
+        'Render finished at', blank=True, null=True)
     error = models.TextField('Error description', blank=True)
 
-    storage = models.FileField('Storage', upload_to=get_rendered_filename, blank=True)
-    image = models.ImageField('Rendered image', upload_to=get_rendered_filename, blank=True)
+    storage = models.FileField(
+        'Storage', upload_to=get_rendered_filename, blank=True)
+    image = models.ImageField(
+        'Rendered image', upload_to=get_rendered_filename, blank=True)
 
-    category = models.ForeignKey(Category, related_name='uploads', blank=True, null=True)
+    category = models.ForeignKey(
+        Category, related_name='uploads', blank=True, null=True, on_delete=models.CASCADE)
     user_approved = models.BooleanField('Approved by user', default=False)
     admin_approved = models.BooleanField('Approved by admin', default=False)
 
@@ -143,13 +152,18 @@ class Upload(models.Model):
 
 class Scene(models.Model):
 
-    engine = models.CharField('Engine version', max_length=6, choices=ENGINE_VERSIONS)
+    engine = models.CharField(
+        'Engine version', max_length=6, choices=ENGINE_VERSIONS)
     type = models.CharField('Scene type', max_length=1, choices=SCENE_TYPES)
     description = models.TextField('Description', blank=True)
-    file = models.FileField('Scene file', upload_to='uploads/scenes/', blank=True)
-    image = models.ImageField('Original image', upload_to='uploads/scenes/', blank=True)
-    thumb_big = models.ImageField('Thumbnail (big)', upload_to='uploads/scenes/', blank=True)
-    thumb_small = models.ImageField('Thumbnail (small)', upload_to='uploads/scenes/', blank=True)
+    file = models.FileField(
+        'Scene file', upload_to='uploads/scenes/', blank=True)
+    image = models.ImageField(
+        'Original image', upload_to='uploads/scenes/', blank=True)
+    thumb_big = models.ImageField(
+        'Thumbnail (big)', upload_to='uploads/scenes/', blank=True)
+    thumb_small = models.ImageField(
+        'Thumbnail (small)', upload_to='uploads/scenes/', blank=True)
 
     class Meta:
         verbose_name = 'Scene'

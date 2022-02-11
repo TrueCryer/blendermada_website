@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.template import Template
-from django.utils.encoding import python_2_unicode_compatible
 
 
 from core.mail import send_mass_html_mail
@@ -20,9 +19,9 @@ MAILING_TYPES = (
 )
 
 
-@python_2_unicode_compatible
 class Mail(models.Model):
-    mailing_type = models.CharField('Mailing type', max_length=3, choices=MAILING_TYPES)
+    mailing_type = models.CharField(
+        'Mailing type', max_length=3, choices=MAILING_TYPES)
     subject = models.CharField('Subject', max_length=255)
     message = models.TextField('Template')
 
@@ -40,7 +39,8 @@ class Mail(models.Model):
         elif self.mailing_type == 'mod':
             queryset = queryset.filter(is_staff=True)
         elif self.mailing_type == 'aut':
-            queryset = queryset.filter(pk__in=set(Material.objects.values_list('user', flat=True)))
+            queryset = queryset.filter(pk__in=set(
+                Material.objects.values_list('user', flat=True)))
         elif self.mailing_type == 'sub':
             queryset = queryset.filter(profile__send_newsletters=True)
         elif self.mailing_type == 'all':

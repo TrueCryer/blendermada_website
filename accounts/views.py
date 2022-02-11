@@ -1,5 +1,5 @@
 from django.contrib.auth import views as auth_views
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, FormView, RedirectView
 
@@ -71,7 +71,8 @@ class ActivationView(TemplateView):
         return super(ActivationView, self).get(request, *args, **kwargs)
 
     def activate(self, request, activation_key):
-        activated_user = RegistrationProfile.objects.activate_user(activation_key)
+        activated_user = RegistrationProfile.objects.activate_user(
+            activation_key)
         return activated_user
 
     def get_success_url(self, request, user):
@@ -94,44 +95,47 @@ def password_reset(request):
     if request.user.is_authenticated():
         return redirect(reverse('account_home'))
     return auth_views.password_reset(request,
-        post_reset_redirect=reverse('password_reset_done'),
-        template_name='accounts/password_reset_form.html',
-        password_reset_form=PasswordResetFormBootstrap,
-    )
+                                     post_reset_redirect=reverse(
+                                         'password_reset_done'),
+                                     template_name='accounts/password_reset_form.html',
+                                     password_reset_form=PasswordResetFormBootstrap,
+                                     )
 
 
 def password_reset_done(request):
     return auth_views.password_reset_done(request,
-        template_name='accounts/password_reset_done.html',
-    )
+                                          template_name='accounts/password_reset_done.html',
+                                          )
 
 
 def password_reset_confirm(request, uidb64, token):
     return auth_views.password_reset_confirm(request, uidb64, token,
-        template_name='accounts/password_reset_confirm.html',
-        set_password_form=SetPasswordFormBootstrap,
-        post_reset_redirect=reverse('password_reset_complete'),
-    )
+                                             template_name='accounts/password_reset_confirm.html',
+                                             set_password_form=SetPasswordFormBootstrap,
+                                             post_reset_redirect=reverse(
+                                                 'password_reset_complete'),
+                                             )
 
 
 def password_reset_complete(request):
     return auth_views.password_reset_complete(request,
-        template_name='accounts/password_reset_complete.html',
-    )
+                                              template_name='accounts/password_reset_complete.html',
+                                              )
 
 
 def password_change(request):
     return auth_views.password_change(request,
-        template_name='accounts/password_change_form.html',
-        password_change_form=PasswordChangeFormBootstrap,
-        post_change_redirect=reverse('password_change_done'),
-    )
+                                      template_name='accounts/password_change_form.html',
+                                      password_change_form=PasswordChangeFormBootstrap,
+                                      post_change_redirect=reverse(
+                                          'password_change_done'),
+                                      )
 
 
 def password_change_done(request):
     return auth_views.password_change_done(request,
-        template_name='accounts/password_change_done.html',
-    )
+                                           template_name='accounts/password_change_done.html',
+                                           )
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -160,17 +164,17 @@ class SettingsView(LoginRequiredMixin, FormView):
         self.request.user.last_name = form.cleaned_data['last_name']
         self.request.user.save()
         UserProfile.objects.filter(user=self.request.user).update(
-            country = form.cleaned_data['country'],
-            send_newsletters = form.cleaned_data['send_newsletters'],
-            send_notifications = form.cleaned_data['send_notifications'],
-            show_fullname = form.cleaned_data['show_fullname'],
-            show_email = form.cleaned_data['show_email'],
-            about = form.cleaned_data['about'],
-            website = form.cleaned_data['website'],
-            deviantart = form.cleaned_data['deviantart'],
-            facebook = form.cleaned_data['facebook'],
-            twitter = form.cleaned_data['twitter'],
-            gplus = form.cleaned_data['gplus'],
+            country=form.cleaned_data['country'],
+            send_newsletters=form.cleaned_data['send_newsletters'],
+            send_notifications=form.cleaned_data['send_notifications'],
+            show_fullname=form.cleaned_data['show_fullname'],
+            show_email=form.cleaned_data['show_email'],
+            about=form.cleaned_data['about'],
+            website=form.cleaned_data['website'],
+            deviantart=form.cleaned_data['deviantart'],
+            facebook=form.cleaned_data['facebook'],
+            twitter=form.cleaned_data['twitter'],
+            gplus=form.cleaned_data['gplus'],
         )
         return super(SettingsView, self).form_valid(form)
 
