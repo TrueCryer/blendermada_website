@@ -18,7 +18,7 @@ urlpatterns = [
     path('favorites/', include('favorites.urls')),
     path('blog/', include('blog.urls')),
 
-    path('/', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('addon/', TemplateView.as_view(template_name='addon.html'), name='addon'),
     path('addon/changelog/',
          TemplateView.as_view(template_name='changelog.html'), name='addon_changelog'),

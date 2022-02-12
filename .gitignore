@@ -65,6 +65,7 @@ manage_prod.py
 
 # Database files
 *.sqlite
+*.sqlite3
 
 # Media files
 media/

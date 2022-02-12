@@ -1,5 +1,5 @@
 import os
-
+from pathlib import Path
 from django.urls import reverse_lazy
 
 
@@ -10,7 +10,7 @@ ALLOWED_HOSTS = []
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # URL
@@ -21,14 +21,14 @@ ROOT_URLCONF = 'bmd.urls.base'
 # Database
 
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite'),
-         }
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
-SECRET_KEY = "secret"
+SECRET_KEY = "django-insecure-$4v@fd!_-a4(7#+o%#5bw5urd_knmfl8(_hr-3p_=-rzg*uz&v"
 
 
 # Application definition
@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'profiles.apps.ProfilesConfig',
     'uploads.apps.UploadsConfig',
 )
-
+"""
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +62,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+]"""
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 WSGI_APPLICATION = 'bmd.wsgi.application'
@@ -85,7 +95,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static',
 )
 
 MEDIA_URL = '/media/'
@@ -102,7 +112,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
