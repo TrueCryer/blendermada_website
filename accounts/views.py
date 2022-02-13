@@ -80,19 +80,19 @@ class ActivationView(TemplateView):
 
 
 def login(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect(reverse('account_home'))
-    return auth_views.login(request, template_name='accounts/login.html', authentication_form=AuthenticationFormBootstrap)
+    return auth_views.LoginView.as_view(request, template_name='accounts/login.html', authentication_form=AuthenticationFormBootstrap)
 
 
 def logout(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect(reverse('home'))
     return auth_views.logout(request, template_name='accounts/logout.html')
 
 
 def password_reset(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect(reverse('account_home'))
     return auth_views.password_reset(request,
                                      post_reset_redirect=reverse(
