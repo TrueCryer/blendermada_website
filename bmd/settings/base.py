@@ -28,6 +28,9 @@ DATABASES = {
 }
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
 SECRET_KEY = "django-insecure-$4v@fd!_-a4(7#+o%#5bw5urd_knmfl8(_hr-3p_=-rzg*uz&v"
 
 
@@ -52,17 +55,7 @@ INSTALLED_APPS = (
     'profiles.apps.ProfilesConfig',
     'uploads.apps.UploadsConfig',
 )
-"""
-MIDDLEWARE = [
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-]"""
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
