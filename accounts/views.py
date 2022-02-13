@@ -79,63 +79,40 @@ class ActivationView(TemplateView):
         return ('registration_activation_complete', (), {})
 
 
-def login(request):
-    if request.user.is_authenticated:
-        return redirect(reverse('account_home'))
-    return auth_views.LoginView.as_view(request, template_name='accounts/login.html', authentication_form=AuthenticationFormBootstrap)
+class LoginView(auth_views.LoginView):
+    template_name='accounts/login.html'
+    authentication_form = AuthenticationFormBootstrap
 
 
-def logout(request):
-    if not request.user.is_authenticated:
-        return redirect(reverse('home'))
-    return auth_views.logout(request, template_name='accounts/logout.html')
+class LogoutView(auth_views.LogoutView):
+    template_name='accounts/logout.html'
 
 
-def password_reset(request):
-    if request.user.is_authenticated:
-        return redirect(reverse('account_home'))
-    return auth_views.password_reset(request,
-                                     post_reset_redirect=reverse(
-                                         'password_reset_done'),
-                                     template_name='accounts/password_reset_form.html',
-                                     password_reset_form=PasswordResetFormBootstrap,
-                                     )
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name='accounts/password_reset_form.html',
+    password_reset_form=PasswordResetFormBootstrap
 
 
-def password_reset_done(request):
-    return auth_views.password_reset_done(request,
-                                          template_name='accounts/password_reset_done.html',
-                                          )
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name='accounts/password_reset_confirm.html',
+    set_password_form=SetPasswordFormBootstrap
 
 
-def password_reset_confirm(request, uidb64, token):
-    return auth_views.password_reset_confirm(request, uidb64, token,
-                                             template_name='accounts/password_reset_confirm.html',
-                                             set_password_form=SetPasswordFormBootstrap,
-                                             post_reset_redirect=reverse(
-                                                 'password_reset_complete'),
-                                             )
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name='accounts/password_reset_done.html'
 
 
-def password_reset_complete(request):
-    return auth_views.password_reset_complete(request,
-                                              template_name='accounts/password_reset_complete.html',
-                                              )
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name='accounts/password_reset_complete.html'
 
 
-def password_change(request):
-    return auth_views.password_change(request,
-                                      template_name='accounts/password_change_form.html',
-                                      password_change_form=PasswordChangeFormBootstrap,
-                                      post_change_redirect=reverse(
-                                          'password_change_done'),
-                                      )
+class PasswordChangeView(auth_views.PasswordChangeView):
+    template_name='accounts/password_change_form.html'
+    password_change_form=PasswordChangeFormBootstrap
 
 
-def password_change_done(request):
-    return auth_views.password_change_done(request,
-                                           template_name='accounts/password_change_done.html',
-                                           )
+class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):
+    template_name='accounts/password_change_done.html'
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
