@@ -9,7 +9,7 @@ from .views import (CategoryListView,
 app_name = 'blog'
 
 urlpatterns = [
-    path('categories/$', CategoryListView.as_view(), name='category_list'),
+    path('categories/', CategoryListView.as_view(), name='category_list'),
     path('category/<slug:slug>/',
          CategoryDetailView.as_view(), name='category_detail'),
     path('', PostListView.as_view(), name='post_list'),
