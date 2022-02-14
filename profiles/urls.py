@@ -8,8 +8,8 @@ app_name = 'profiles'
 
 urlpatterns = [
 
-    path('<slug:slug>/detail/', DetailView.as_view(), name='detail'),
-    path('<slug:slug>/materials/', MaterialsView.as_view(), name='materials'),
-    path('<slug:slug>/activities/', ActivitiesView.as_view(), name='activities'),
+    path('<slug>/detail/', DetailView.as_view(), name='detail'),
+    path('<slug>/materials/', MaterialsView.as_view(), name='materials'),
+    path('<slug>/activities/', ActivitiesView.as_view(), name='activities'),
 
 ]
