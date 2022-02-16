@@ -89,12 +89,12 @@ class LogoutView(auth_views.LogoutView):
 
 
 class PasswordResetView(auth_views.PasswordResetView):
-    template_name='accounts/password_reset_form.html',
+    template_name='accounts/password_reset_form.html'
     password_reset_form=PasswordResetFormBootstrap
 
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
-    template_name='accounts/password_reset_confirm.html',
+    template_name='accounts/password_reset_confirm.html'
     set_password_form=SetPasswordFormBootstrap
 
 

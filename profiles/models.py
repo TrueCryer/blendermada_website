@@ -9,14 +9,25 @@ from core.settings import COUNTRIES
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                related_name='profile',
-                                on_delete=models.CASCADE)
-    send_newsletters = models.BooleanField('Send newsletters', default=False)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='profile',
+    )
+    send_newsletters = models.BooleanField(
+        'Send newsletters',
+        default=False,
+    )
     send_notifications = models.BooleanField(
-        'Send notifications', default=False)
+        'Send notifications',
+        default=False,
+    )
     country = models.CharField(
-        'Country', max_length=2, choices=COUNTRIES, default='RU')
+        'Country',
+        max_length=2,
+        choices=COUNTRIES,
+        default='RU',
+    )
     show_fullname = models.BooleanField(
         'Show full name on site', default=False)
     show_email = models.BooleanField('Show e-mail on site', default=False)
