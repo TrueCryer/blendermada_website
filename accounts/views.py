@@ -80,39 +80,39 @@ class ActivationView(TemplateView):
 
 
 class LoginView(auth_views.LoginView):
-    template_name='accounts/login.html'
+    template_name = 'accounts/login.html'
     authentication_form = AuthenticationFormBootstrap
 
 
 class LogoutView(auth_views.LogoutView):
-    template_name='accounts/logout.html'
+    template_name = 'accounts/logout.html'
 
 
 class PasswordResetView(auth_views.PasswordResetView):
-    template_name='accounts/password_reset_form.html'
-    password_reset_form=PasswordResetFormBootstrap
+    template_name = 'accounts/password_reset_form.html'
+    password_reset_form = PasswordResetFormBootstrap
 
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
-    template_name='accounts/password_reset_confirm.html'
-    set_password_form=SetPasswordFormBootstrap
+    template_name = 'accounts/password_reset_confirm.html'
+    set_password_form = SetPasswordFormBootstrap
 
 
 class PasswordResetDoneView(auth_views.PasswordResetDoneView):
-    template_name='accounts/password_reset_done.html'
+    template_name = 'accounts/password_reset_done.html'
 
 
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
-    template_name='accounts/password_reset_complete.html'
+    template_name = 'accounts/password_reset_complete.html'
 
 
 class PasswordChangeView(auth_views.PasswordChangeView):
-    template_name='accounts/password_change_form.html'
-    password_change_form=PasswordChangeFormBootstrap
+    template_name = 'accounts/password_change_form.html'
+    password_change_form = PasswordChangeFormBootstrap
 
 
 class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):
-    template_name='accounts/password_change_done.html'
+    template_name = 'accounts/password_change_done.html'
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
